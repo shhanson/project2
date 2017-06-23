@@ -3,6 +3,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const path = require('path');
+const cookieSession = require('cookie-session');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,6 +21,11 @@ app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.disable('x-powered-by');
+
+app.use(cookieSession({
+    name: 'session',
+    keys: ['key1', 'key2']
+}));
 
 //Use routes
 app.use(usersRouter);

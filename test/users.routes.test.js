@@ -17,11 +17,11 @@ describe('routes : users', () => {
             .then(() => {
                 knex.migrate.latest()
                     .then(() => {
-                        // knex.seed.run()
-                        //     .then(() => {
+                        knex.seed.run()
+                            .then(() => {
                         done();
                     });
-                //});
+                });
             });
     });
 

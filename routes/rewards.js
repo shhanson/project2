@@ -11,9 +11,11 @@ const bodyParser = require('body-parser');
 const ev = require('express-validation');
 const validations = require('../validations/users');
 
-router.get('/rewards', (req, res, next) =>{
+router.use(bodyParser.json());
 
-});
+// router.get('/rewards', (req, res, next) =>{
+//
+// });
 
 router.get('/rewards/:id', (req, res, next) => {
 
