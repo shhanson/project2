@@ -60,6 +60,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
             hashed_password: digest
         }).then(()=>{
             res.render('pages/login');
+            // res.sendStatus(200);
         }).catch((err) => {
             //next(utils.knexError(knex, err));
             err.status = 500;
@@ -69,7 +70,6 @@ router.post('/users', ev(validations.post), (req, res, next) => {
         })
 
     }).catch((err) => {
-        //bcrypt error
         console.error(err);
         next(err);
 

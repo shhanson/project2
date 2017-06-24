@@ -6,7 +6,7 @@ const should = chai.should();
 
 const server = require('../server');
 const knex = require('../util/knex');
-const testUser = require('../util/testuser');
+const testUsers = require('../util/testusers');
 
 chai.use(chaiHttp);
 
@@ -77,7 +77,7 @@ describe('routes : users', () => {
         it('should allow new user registration and return a success response', (done) => {
             chai.request(server)
                 .post('/users')
-                .send(testUser)
+                .send(testUsers[1])
                 .end((err, res) => {
                     should.not.exist(err);
                     res.status.should.equal(200);
