@@ -18,26 +18,21 @@ router.use(bodyParser.urlencoded({
     extended: false
 }));
 
-function getUser(userID) {
-    return knex('users').where('id', userID);
-}
 
 function getTasksForUser(userID) {
-    return knex('users').join('users_tasks', 'users.id', 'users_tasks.user_id').where('users_tasks.user_id', userID);
+    return knex('users_tasks').join('tasks', 'users_tasks.task_id', 'tasks.id').where('users_tasks.user_id', userID);
 }
 
 function getRewardsForUser(userID) {
-    return knex('users').join('users_rewards', 'users.id', 'users_rewards.user_id').where('users_rewards.user_id', userID);
+    return knex('users_rewards').join('rewards', 'users_rewards.reward_id', 'rewards.id').where('users_rewards.user_id', userID);
 }
 
 function getTasksRewardsForUser(userID) {
     return Promise.all([
-        getUser(userID),
         getTasksForUser(userID),
         getRewardsForUser(userID)
     ]).then((result) => {
-        const [user, userTasks, userRewards] = result;
-        return user, userTasks, userRewards;
+        return result;
     });
 }
 
@@ -69,15 +64,11 @@ router.get('/users/:id', (req, res, next) => {
     if (!utils.isValidID(userID)) {
         next();
     } else {
-        // knex('users').where('id', userID).then((user)=>{
         getTasksRewardsForUser(userID).then((result) => {
 
-            console.log(result);
-
             res.render('pages/user', {
-                userData: result[0],
-                userTasks: result[1],
-                userRewards: result[2]
+                userTasks: result[0],
+                userRewards: result[1]
             });
 
         }).catch((err) => {
@@ -98,9 +89,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
             hashed_password: digest
         }).then(() => {
             res.render('pages/login');
-            // res.sendStatus(200);
         }).catch((err) => {
-            //next(utils.knexError(knex, err));
             err.status = 500;
             console.error(err);
             knex.destroy();
@@ -110,10 +99,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
     }).catch((err) => {
         console.error(err);
         next(err);
-
     });
-
-
 });
 
 
@@ -167,7 +153,7 @@ router.delete('/users/:id', (req, res, next) => {
         next();
     } else {
         deleteUserFromJoinTables(userID).then(() => {
-            getUser(userID).del().then(() => {
+            knex('users').where('id', userID).del().then(() => {
                 res.sendStatus(200);
             }).catch((err) => {
                 err.status = 500;
