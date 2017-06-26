@@ -5,7 +5,7 @@ const router = express.Router();
 const knex = require('../util/knex');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
-const utils = require ('../util/utils');
+const utils = require('../util/utils');
 
 //Validation setup
 const ev = require('express-validation');
@@ -14,14 +14,38 @@ const validations = require('../validations/users');
 const saltRounds = 11;
 
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({
+    extended: false
+}));
 
-function getTasksForUser(userID){
-
+function getUser(userID) {
+    return knex('users').where('id', userID);
 }
 
-function getRewardsForUser(userID){
+function getTasksForUser(userID) {
+    return knex('users').join('users_tasks', 'users.id', 'users_tasks.user_id').where('users_tasks.user_id', userID);
+}
 
+function getRewardsForUser(userID) {
+    return knex('users').join('users_rewards', 'users.id', 'users_rewards.user_id').where('users_rewards.user_id', userID);
+}
+
+function getTasksRewardsForUser(userID) {
+    return Promise.all([
+        getUser(userID),
+        getTasksForUser(userID),
+        getRewardsForUser(userID)
+    ]).then((result) => {
+        const [user, userTasks, userRewards] = result;
+        return user, userTasks, userRewards;
+    });
+}
+
+function deleteUserFromJoinTables(userID) {
+    return Promise.all([
+        knex('users_tasks').where('user_id', userID).del(),
+        knex('users_rewards').where('user_id', userID).del()
+    ]);
 }
 
 //GET all users (superuser only)
@@ -42,16 +66,21 @@ router.get('/users', (req, res, next) => {
 //GET a user with the given ID
 router.get('/users/:id', (req, res, next) => {
     const userID = Number.parseInt(req.params.id);
-    if(!utils.isValidID(userID)){
+    if (!utils.isValidID(userID)) {
         next();
     } else {
-        knex('users').where('id', userID).then((user)=>{
-            //call getTasks and getRewards
+        // knex('users').where('id', userID).then((user)=>{
+        getTasksRewardsForUser(userID).then((result) => {
+
+            console.log(result);
+
             res.render('pages/user', {
-                userData: user
+                userData: result[0],
+                userTasks: result[1],
+                userRewards: result[2]
             });
 
-        }).catch((err)=>{
+        }).catch((err) => {
             err.status = 500;
             console.error(err);
             knex.destroy();
@@ -67,7 +96,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
         knex('users').insert({
             email: req.body.email,
             hashed_password: digest
-        }).then(()=>{
+        }).then(() => {
             res.render('pages/login');
             // res.sendStatus(200);
         }).catch((err) => {
@@ -96,11 +125,20 @@ router.post('/session', ev(validations.post), (req, res, next) => {
         const userID = user.id;
 
         bcrypt.compare(req.body.password, storedPassword).then((matched) => {
-            if(matched){
+            if (matched) {
                 req.session.id = userID;
-                res.render('pages/user',{
-                    userData: user
+
+                getTasksRewardsForUser(userID).then((result) => {
+
+                    res.render('pages/user', {
+                        userData: result[0],
+                        userTasks: result[1],
+                        userRewards: result[2]
+                    });
+
                 });
+
+
             } else {
                 //wrong password
                 console.error("Wrong email or password!");
@@ -113,7 +151,7 @@ router.post('/session', ev(validations.post), (req, res, next) => {
             // console.error("Wrong email or password!");
             next(err);
         });
-    }).catch((err)=>{
+    }).catch((err) => {
         //email not found
         err.status = 401;
         console.error("Wrong email or password!")
@@ -125,17 +163,25 @@ router.post('/session', ev(validations.post), (req, res, next) => {
 //DELETE a user (superuser) only
 router.delete('/users/:id', (req, res, next) => {
     const userID = Number.parseInt(req.params.id);
-    if(!utils.isValidID(userID)){
+    if (!utils.isValidID(userID)) {
         next();
     } else {
-        knex('users').where('id', userID).del().then(() => {
-            res.sendStatus(200);
-        }).catch((err)=> {
+        deleteUserFromJoinTables(userID).then(() => {
+            getUser(userID).del().then(() => {
+                res.sendStatus(200);
+            }).catch((err) => {
+                err.status = 500;
+                console.error(err);
+                knex.destroy();
+                next(err);
+            });
+        }).catch((err) => {
             err.status = 500;
             console.error(err);
             knex.destroy();
             next(err);
         });
+
     }
 });
 

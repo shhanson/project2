@@ -12,14 +12,16 @@ const ev = require('express-validation');
 const validations = require('../validations/tasks');
 
 router.use(bodyParser.json());
-router.use(bodyParser.urlencoded({ extended: false }))
+router.use(bodyParser.urlencoded({
+    extended: false
+}))
 // router.get('/tasks', (req, res, next) =>{
 //
 // });
 
 router.get('/tasks/:id', (req, res, next) => {
     const taskID = Number.parseInt(req.params.id);
-    if(!utils.isValidID(taskID)){
+    if (!utils.isValidID(taskID)) {
         next();
     } else {
         knex('tasks').where('id', taskID).then((task) => {
@@ -42,11 +44,11 @@ router.post('/tasks', ev(validations.post), (req, res, next) => {
         description: req.body.description,
         priority: req.body.priority || 'med',
         completed_count: 0
-    }).then(()=>{
+    }).then(() => {
         //how to get user/session ID????
         res.sendStatus(200);
 
-    }).catch((err)=>{
+    }).catch((err) => {
         err.status = 500;
         console.error(err);
         knex.destroy();
@@ -59,17 +61,17 @@ router.post('/tasks', ev(validations.post), (req, res, next) => {
 router.put('/tasks/:id', ev(validations.put), (req, res, next) => {
 
     const taskID = Number.parseInt(req.params.id);
-    if(!utils.isValidID(taskID)){
+    if (!utils.isValidID(taskID)) {
         next();
     } else {
         knex('tasks').where('id', taskID).returning('*').update({
             description: req.body.description,
             priority: req.body.priority,
             completed_count: req.body.completed_count
-        }).then((updatedTask)=>{
-        //Render user page-- how to get user ID???
+        }).then((updatedTask) => {
+            //Render user page-- how to get user ID???
             res.json(updatedTask);
-        }).catch((err)=> {
+        }).catch((err) => {
             err.status = 500;
             console.error(err);
             knex.destroy();
@@ -81,11 +83,19 @@ router.put('/tasks/:id', ev(validations.put), (req, res, next) => {
 router.delete('/tasks/:id', (req, res, next) => {
 
     const taskID = Number.parseInt(req.params.id);
-    if(!utils.isValidID(taskID)){
+    if (!utils.isValidID(taskID)) {
         next();
     } else {
-        knex('tasks').where('id', taskID).del().then(()=>{
-            res.sendStatus(200);
+        knex('users_tasks').where('task_id', taskID).del().then(() => {
+            knex('tasks').where('id', taskID).del().then(() => {
+                res.sendStatus(200);
+            }).catch((err) => {
+                err.status = 500;
+                console.error(err);
+                knex.destroy();
+                next(err);
+            });
+
 
         }).catch((err) => {
             err.status = 500;

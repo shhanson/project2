@@ -62,7 +62,7 @@ router.put('/rewards/:id', ev(validations.put), (req, res, next) => {
             value: req.body.value
         }).then((updatedReward) => {
 
-        //Render user page-- how to get user ID???
+            //Render user page-- how to get user ID???
             res.json(updatedReward);
         }).catch((err) => {
             err.status = 500;
@@ -78,8 +78,18 @@ router.delete('/rewards/:id', (req, res, next) => {
     if (!utils.isValidID(rewardID)) {
         next();
     } else {
-        knex('rewards').where('id', rewardID).del().then(() => {
-            res.sendStatus(200);
+
+        knex('users_rewards').where('reward_id', rewardID).del().then(() => {
+            knex('rewards').where('id', rewardID).del().then(() => {
+                res.sendStatus(200);
+            }).catch((err) => {
+                err.status = 500;
+                console.error(err);
+                knex.destroy();
+                next(err);
+            });
+
+
         }).catch((err) => {
             err.status = 500;
             console.error(err);
