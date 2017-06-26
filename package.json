@@ -27,13 +27,18 @@
     "express-validation": "^1.0.2",
     "joi": "^10.6.0",
     "knex": "^0.13.0",
+    "morgan": "^1.8.2",
     "pg": "^6.4.0"
   },
   "devDependencies": {
     "browser-sync": "^2.18.12",
     "chai": "^4.0.2",
     "chai-http": "^3.0.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb-base": "^11.2.0",
+    "eslint-plugin-import": "^2.6.0",
     "gulp": "^3.9.1",
-    "mocha": "^3.4.2"
+    "mocha": "^3.4.2",
+    "morgan": "^1.8.2"
   }
 }
