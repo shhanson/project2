@@ -64,12 +64,7 @@ describe('routes : tasks', () => {
         it('should allow the user to create a new task and return a success response', (done) => {
             chai.request(server)
                 .post('/tasks')
-                .send({
-                    id: 55,
-                    description: 'Test task',
-                    priority: 'low',
-                    completed_count: 0
-                })
+                .send(testTask)
                 .end((err, res) => {
                     should.not.exist(err);
                     res.status.should.equal(200);

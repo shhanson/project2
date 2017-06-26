@@ -6,6 +6,7 @@ const should = chai.should();
 
 const server = require('../server');
 const knex = require('../util/knex');
+const testReward = require('../util/testreward');
 
 chai.use(chaiHttp);
 
@@ -35,7 +36,7 @@ describe('routes : rewards', () => {
     describe('GET /rewards/:id', () => {
         it('should return the reward at the specified ID and return a success message', (done) => {
             chai.request(server)
-                .get('/tasks/1')
+                .get('/rewards/1')
                 .end((err, res) => {
                     should.not.exist(err);
                     res.status.should.equal(200);
@@ -61,14 +62,17 @@ describe('routes : rewards', () => {
 
     describe('POST /rewards', () => {
         it('should allow the user to create a new task and return a success response', (done) => {
-            // chai.request(server)
-            //     .post('/tasks')
-            //     .send(testUser)
-            //     .end((err, res) => {
-            //         should.not.exist(err);
-            //         res.status.should.equal(200);
-            //         done();
-            //     });
+            chai.request(server)
+                .post('/rewards')
+                .send({
+                    description: 'hello world reward',
+                    value: 40
+                })
+                .end((err, res) => {
+                    should.not.exist(err);
+                    res.status.should.equal(200);
+                    done();
+                });
         });
 
     });

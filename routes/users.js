@@ -14,6 +14,7 @@ const validations = require('../validations/users');
 const saltRounds = 11;
 
 router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: false }))
 
 function getTasksForUser(userID){
 

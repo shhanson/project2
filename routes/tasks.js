@@ -12,7 +12,7 @@ const ev = require('express-validation');
 const validations = require('../validations/tasks');
 
 router.use(bodyParser.json());
-
+router.use(bodyParser.urlencoded({ extended: false }))
 // router.get('/tasks', (req, res, next) =>{
 //
 // });
@@ -37,7 +37,6 @@ router.get('/tasks/:id', (req, res, next) => {
 });
 
 router.post('/tasks', ev(validations.post), (req, res, next) => {
-    console.log(req.body.description);
 
     knex('tasks').insert({
         description: req.body.description,
@@ -68,6 +67,7 @@ router.put('/tasks/:id', ev(validations.put), (req, res, next) => {
             priority: req.body.priority,
             completed_count: req.body.completed_count
         }).then((updatedTask)=>{
+        //Render user page-- how to get user ID???
             res.json(updatedTask);
         }).catch((err)=> {
             err.status = 500;
