@@ -15,6 +15,14 @@ const saltRounds = 11;
 
 router.use(bodyParser.json());
 
+function getTasksForUser(userID){
+
+}
+
+function getRewardsForUser(userID){
+
+}
+
 //GET all users (superuser only)
 router.get('/users', (req, res, next) => {
     knex('users').then((allUsers) => {
@@ -32,12 +40,12 @@ router.get('/users', (req, res, next) => {
 
 //GET a user with the given ID
 router.get('/users/:id', (req, res, next) => {
-    let userID = Number.parseInt(req.params.id);
+    const userID = Number.parseInt(req.params.id);
     if(!utils.isValidID(userID)){
         next();
     } else {
         knex('users').where('id', userID).then((user)=>{
-
+            //call getTasks and getRewards
             res.render('pages/user', {
                 userData: user
             });
@@ -83,8 +91,8 @@ router.post('/users', ev(validations.post), (req, res, next) => {
 router.post('/session', ev(validations.post), (req, res, next) => {
 
     knex('users').where('email', req.body.email).first().then((user) => {
-        let storedPassword = user.hashed_password;
-        let userID = user.id;
+        const storedPassword = user.hashed_password;
+        const userID = user.id;
 
         bcrypt.compare(req.body.password, storedPassword).then((matched) => {
             if(matched){
@@ -115,7 +123,7 @@ router.post('/session', ev(validations.post), (req, res, next) => {
 
 //DELETE a user (superuser) only
 router.delete('/users/:id', (req, res, next) => {
-    let userID = Number.parseInt(req.params.id);
+    const userID = Number.parseInt(req.params.id);
     if(!utils.isValidID(userID)){
         next();
     } else {

@@ -7,6 +7,8 @@ const should = chai.should();
 const server = require('../server');
 const knex = require('../util/knex');
 
+const testTask = require('../util/testtask');
+
 chai.use(chaiHttp);
 
 describe('routes : tasks', () => {
@@ -30,18 +32,6 @@ describe('routes : tasks', () => {
                 done();
             });
     });
-
-    // describe('GET /tasks', () => {
-    //     it('should list ALL blobs on /blobs GET', function(done) {
-    //         chai.request(server)
-    //             .get('/users')
-    //             .end((err, res) => {
-    //                 should.not.exist(err);
-    //                 res.should.have.status(200);
-    //                 done();
-    //             });
-    //     });
-    // });
 
     describe('GET /tasks/:id', () => {
         it('should return the task at the specified ID and return a success message', (done) => {
@@ -72,14 +62,19 @@ describe('routes : tasks', () => {
 
     describe('POST /tasks', () => {
         it('should allow the user to create a new task and return a success response', (done) => {
-            // chai.request(server)
-            //     .post('/tasks')
-            //     .send(testUser)
-            //     .end((err, res) => {
-            //         should.not.exist(err);
-            //         res.status.should.equal(200);
-            //         done();
-            //     });
+            chai.request(server)
+                .post('/tasks')
+                .send({
+                    id: 55,
+                    description: 'Test task',
+                    priority: 'low',
+                    completed_count: 0
+                })
+                .end((err, res) => {
+                    should.not.exist(err);
+                    res.status.should.equal(200);
+                    done();
+                });
         });
 
     });
