@@ -27,6 +27,7 @@
     "express-validation": "^1.0.2",
     "joi": "^10.6.0",
     "knex": "^0.13.0",
+    "materialize-css": "^0.99.0",
     "morgan": "^1.8.2",
     "pg": "^6.4.0"
   },

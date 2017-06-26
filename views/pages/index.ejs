@@ -1,18 +1,20 @@
 <% include ../partials/header %>
 
+    <div class="container">
+        <div class="row">
+            <div class='col s12 m6 offset-m3'>
+                <form action="/session" method="post">
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email">
+                        <label for="password">Password:</label>
+                        <input type="text"  name='password' id='password'>
+                    <input type="submit">
+                </form>
 
-    <form action="/session" method="post">
-        <label for="email">Email:</label>
-        <input type="email" name="email" id="email">
-        <label for="password">Password:</label>
-        <input type="text" name='password' id='password'>
-        <input type="submit">
-
-    </form>
-
-    <a href="register" title="New user registration">Register a new account</a>
+                <a href="register" title="New user registration">Register a new account</a>
 
 
-
-
-    <% include ../partials/footer %>
+            </div>
+        </div>
+    </div>
+<% include ../partials/footer %>

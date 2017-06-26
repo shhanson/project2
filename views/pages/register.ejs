@@ -1,15 +1,29 @@
 <% include ../partials/header %>
 
-<form action="/users" method="post">
-  <label for="email">Email:</label>
-  <input type="email" name="email" id="email">
-  <label for="password">Password (8 character minimum):</label>
-  <input type="text" name='password' id='password'>
-  <label for="vpassword">Retype password:</label>
-  <input type='text' name='vpassword' id='vpassword'>
-  <input type="submit">
+    <div class='container'>
+        <div class="row">
 
-</form>
+          <div class='col s12 m6 offset-m3'>
+
+            <form action="/users" method="post">
+
+                <label for="email">Email:</label>
+                <input type="email" name="email" id="email">
+
+                <label for="password">Password (8 character minimum):</label>
+                <input type="text" name='password' id='password'>
 
 
-<% include ../partials/footer %>
+                <label for="vpassword">Retype password:</label>
+                <input type='text' name='vpassword' id='vpassword'>
+                <input type="submit">
+
+            </form>
+
+          </div>
+        </div>
+    </div>
+
+
+
+    <% include ../partials/footer %>

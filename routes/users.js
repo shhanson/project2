@@ -41,16 +41,21 @@ function deleteUserFromJoinTables(userID) {
 
 // GET all users (superuser only)
 router.get('/users', (req, res, next) => {
-  knex('users').then((allUsers) => {
-    res.render('pages/users', {
-      allUserData: allUsers,
+  if (req.session.isAdmin) {
+    knex('users').then((allUsers) => {
+      res.render('pages/users', {
+        allUserData: allUsers,
+      });
+    }).catch((err) => {
+      console.error(err);
+      knex.destroy();
+      next(err);
     });
-  }).catch((err) => {
-    err.status = 500;
-    console.error(err);
-    knex.destroy();
+  } else {
+    const err = new Error('Not authorized!');
+    err.status = 401;
     next(err);
-  });
+  }
 });
 
 
@@ -67,7 +72,6 @@ router.get('/users/:id', (req, res, next) => {
         userRewards: result[1],
       });
     }).catch((err) => {
-      err.status = 500;
       console.error(err);
       knex.destroy();
       next(err);
@@ -82,11 +86,10 @@ router.post('/users', ev(validations.reg_post), (req, res, next) => {
       email: req.body.email,
       hashed_password: digest,
     }).then(() => {
-      res.render('pages/login', {
-        title: 'yo',
+      res.render('pages/index', {
+        title: 'Login',
       });
     }).catch((err) => {
-      err.status = 500;
       console.error(err);
       knex.destroy();
       next(err);
@@ -109,6 +112,7 @@ router.post('/session', ev(validations.login_post), (req, res, next) => {
         req.session.id = userID;
         req.session.isAdmin = user.is_admin;
 
+
         getTasksRewardsForUser(userID).then((result) => {
           res.render('pages/user', {
             title: 'Hello, user!',
@@ -116,7 +120,6 @@ router.post('/session', ev(validations.login_post), (req, res, next) => {
             userRewards: result[1],
           });
         }).catch((err) => {
-          err.status = 500;
           console.error(err);
           knex.destroy();
           next(err);
@@ -152,14 +155,12 @@ router.delete('/users/:id', (req, res, next) => {
         res.sendStatus(200);
       })
       .catch((err) => {
-        err.status = 500;
         console.error(err);
         knex.destroy();
         next(err);
       });
     })
     .catch((err) => {
-      err.status = 500;
       console.error(err);
       knex.destroy();
       next(err);
@@ -170,7 +171,7 @@ router.delete('/users/:id', (req, res, next) => {
 // LOGOUT (delete session)
 router.delete('/session', (req, res) => {
   req.session = null;
-  res.render('pages/login');
+  res.render('pages/index');
 });
 
 module.exports = router;

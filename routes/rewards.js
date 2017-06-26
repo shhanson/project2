@@ -24,7 +24,6 @@ router.get('/rewards/:id', (req, res, next) => {
     knex('rewards').where('id', rewardID).then((reward) => {
       res.json(reward);
     }).catch((err) => {
-      err.status = 500;
       console.error(err);
       knex.destroy();
       next(err);
@@ -40,7 +39,6 @@ router.post('/rewards', ev(validations.post), (req, res, next) => {
     // Render user page-- how to get user ID???
     res.sendStatus(200);
   }).catch((err) => {
-    err.status = 500;
     console.error(err);
     knex.destroy();
     next(err);
@@ -61,7 +59,6 @@ router.put('/rewards/:id', ev(validations.put), (req, res, next) => {
       res.json(updatedReward);
     })
     .catch((err) => {
-      err.status = 500;
       console.error(err);
       knex.destroy();
       next(err);
@@ -79,14 +76,12 @@ router.delete('/rewards/:id', (req, res, next) => {
         res.sendStatus(200);
       })
       .catch((err) => {
-        err.status = 500;
         console.error(err);
         knex.destroy();
         next(err);
       });
     })
     .catch((err) => {
-      err.status = 500;
       console.error(err);
       knex.destroy();
       next(err);
