@@ -35,7 +35,11 @@ app.use(rewardsRouter);
 
 // Render index page
 app.get('/', (req, res) => {
-  res.render('pages/login', { title: 'Welcome!' });
+  res.render('pages/index', { title: 'Welcome!' });
+});
+
+app.get('/register', (req, res) => {
+  res.render('pages/register', { title: 'New user registration' });
 });
 
 // Error handling for 404

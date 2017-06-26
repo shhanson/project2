@@ -1,0 +1,15 @@
+<% include ../partials/header %>
+
+<form action="/users" method="post">
+  <label for="email">Email:</label>
+  <input type="email" name="email" id="email">
+  <label for="password">Password (8 character minimum):</label>
+  <input type="text" name='password' id='password'>
+  <label for="vpassword">Retype password:</label>
+  <input type='text' name='vpassword' id='vpassword'>
+  <input type="submit">
+
+</form>
+
+
+<% include ../partials/footer %>

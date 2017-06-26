@@ -62,6 +62,7 @@ router.get('/users/:id', (req, res, next) => {
   } else {
     getTasksRewardsForUser(userID).then((result) => {
       res.render('pages/user', {
+        title: 'Hello, user!',
         userTasks: result[0],
         userRewards: result[1],
       });
@@ -75,13 +76,15 @@ router.get('/users/:id', (req, res, next) => {
 });
 
 // POST a new user (new user registration)
-router.post('/users', ev(validations.post), (req, res, next) => {
+router.post('/users', ev(validations.reg_post), (req, res, next) => {
   bcrypt.hash(req.body.password, saltRounds).then((digest) => {
     knex('users').insert({
       email: req.body.email,
       hashed_password: digest,
     }).then(() => {
-      res.render('pages/login');
+      res.render('pages/login', {
+        title: 'yo',
+      });
     }).catch((err) => {
       err.status = 500;
       console.error(err);
@@ -96,7 +99,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
 
 
 // POST for a new session (registered user login)
-router.post('/session', (req, res, next) => {
+router.post('/session', ev(validations.login_post), (req, res, next) => {
   knex('users').where('email', req.body.email).first().then((user) => {
     const storedPassword = user.hashed_password;
     const userID = user.id;

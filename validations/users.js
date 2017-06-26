@@ -1,10 +1,20 @@
-'use strict';
-
 const Joi = require('joi');
 
-module.exports.post = {
-    body: {
-        email: Joi.string().label('Email').required().email().trim(),
-        password: Joi.string().label('Password').required().trim().min(8)
-    }
+module.exports.login_post = {
+  body: {
+    email: Joi.string().label('email').required().email()
+    .trim(),
+    password: Joi.string().label('password').required()
+    .min(8),
+  },
+};
+
+module.exports.reg_post = {
+  body: {
+    email: Joi.string().label('email').required().email()
+    .trim(),
+    password: Joi.string().label('password').required()
+    .min(8),
+    vpassword: Joi.ref('password'),
+  },
 };

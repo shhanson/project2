@@ -33,7 +33,6 @@ router.get('/rewards/:id', (req, res, next) => {
 });
 
 router.post('/rewards', ev(validations.post), (req, res, next) => {
-  console.log(req.body.description);
   knex('rewards').insert({
     description: req.body.description,
     value: req.body.value,

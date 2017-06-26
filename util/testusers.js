@@ -1,9 +1,7 @@
-
-
 module.exports = [
   {
     email: 'testuseremail@domain.com',
-    password: 'abc123',
+    password: 'abc12345',
   },
 
   {
