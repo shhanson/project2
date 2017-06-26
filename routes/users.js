@@ -17,7 +17,6 @@ router.use(bodyParser.urlencoded({
   extended: false,
 }));
 
-
 function getTasksForUser(userID) {
   return knex('users_tasks').join('tasks', 'users_tasks.task_id', 'tasks.id').where('users_tasks.user_id', userID);
 }
@@ -97,7 +96,7 @@ router.post('/users', ev(validations.post), (req, res, next) => {
 
 
 // POST for a new session (registered user login)
-router.post('/session', ev(validations.post), (req, res, next) => {
+router.post('/session', (req, res, next) => {
   knex('users').where('email', req.body.email).first().then((user) => {
     const storedPassword = user.hashed_password;
     const userID = user.id;
@@ -105,13 +104,19 @@ router.post('/session', ev(validations.post), (req, res, next) => {
     bcrypt.compare(req.body.password, storedPassword).then((matched) => {
       if (matched) {
         req.session.id = userID;
+        req.session.isAdmin = user.is_admin;
 
         getTasksRewardsForUser(userID).then((result) => {
           res.render('pages/user', {
-            userData: result[0],
-            userTasks: result[1],
-            userRewards: result[2],
+            title: 'Hello, user!',
+            userTasks: result[0],
+            userRewards: result[1],
           });
+        }).catch((err) => {
+          err.status = 500;
+          console.error(err);
+          knex.destroy();
+          next(err);
         });
       } else {
       // wrong password

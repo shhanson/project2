@@ -19,7 +19,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use(morgan('dev'));
+app.use(morgan('dev'));
 
 app.disable('x-powered-by');
 
@@ -35,7 +35,7 @@ app.use(rewardsRouter);
 
 // Render index page
 app.get('/', (req, res) => {
-  res.render('pages/index', { title: 'Welcome!' });
+  res.render('pages/login', { title: 'Welcome!' });
 });
 
 // Error handling for 404
