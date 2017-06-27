@@ -1,20 +1,35 @@
 <% include ../partials/header %>
 
+  <% include ../partials/navbar %>
+
     <div class="container">
-        <div class="row">
-            <div class='col s12 m6 offset-m3'>
-                <form action="/session" method="post">
-                        <label for="email">Email:</label>
-                        <input type="email" name="email" id="email">
-                        <label for="password">Password:</label>
-                        <input type="text"  name='password' id='password'>
-                    <input type="submit">
-                </form>
 
-                <a href="register" title="New user registration">Register a new account</a>
-
-
-            </div>
+      <div class="row">
+        <div class="col s12 m8 offset-m2">
+          <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate ac mauris vel condimentum. Pellentesque posuere enim rutrum nibh suscipit ultricies. Duis sed tellus eros. Praesent id metus consequat, accumsan arcu sit amet, venenatis
+            mauris. </h5>
         </div>
+      </div>
+      <div class="row">
+        <div class='col s12 m6 offset-m3'>
+
+          <form action="/users" method="post">
+
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email">
+
+            <label for="password">Password (8 character minimum):</label>
+            <input type="text" name='password' id='password'>
+
+
+            <label for="vpassword">Retype password:</label>
+            <input type='text' name='vpassword' id='vpassword'>
+            <button class="btn waves-effect waves-light right" type="submit" name="action">Register
+            </button>
+
+          </form>
+
+        </div>
+      </div>
     </div>
-<% include ../partials/footer %>
+    <% include ../partials/footer %>

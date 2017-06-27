@@ -38,6 +38,10 @@ app.get('/', (req, res) => {
   res.render('pages/index', { title: 'Welcome!' });
 });
 
+app.get('/login', (req, res) => {
+  res.render('pages/login', { title: 'Login to Habit Tracker' });
+});
+
 app.get('/register', (req, res) => {
   res.render('pages/register', { title: 'New user registration' });
 });
