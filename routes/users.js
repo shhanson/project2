@@ -45,6 +45,7 @@ router.get('/users', (req, res, next) => {
     knex('users').then((allUsers) => {
       res.render('pages/users', {
         allUserData: allUsers,
+        leftNavbar: req.session.id,
       });
     }).catch((err) => {
       console.error(err);
@@ -64,18 +65,23 @@ router.get('/users/:id', (req, res, next) => {
   const userID = Number.parseInt(req.params.id);
   if (!utils.isValidID(userID)) {
     next();
-  } else {
+  } else if (userID === req.session.id) {
     getTasksRewardsForUser(userID).then((result) => {
       res.render('pages/user', {
         title: 'Hello, user!',
         userTasks: result[0],
         userRewards: result[1],
+        leftNavbar: userID,
       });
     }).catch((err) => {
       console.error(err);
       knex.destroy();
       next(err);
     });
+  } else {
+    const err = new Error('Not authorized!');
+    err.status = 401;
+    next(err);
   }
 });
 
@@ -86,7 +92,7 @@ router.post('/users', ev(validations.reg_post), (req, res, next) => {
       email: req.body.email,
       hashed_password: digest,
     }).then(() => {
-      res.render('pages/index', {
+      res.render('pages/login', {
         title: 'Login',
       });
     }).catch((err) => {
@@ -118,6 +124,7 @@ router.post('/session', ev(validations.login_post), (req, res, next) => {
             title: 'Hello, user!',
             userTasks: result[0],
             userRewards: result[1],
+            leftNavbar: userID,
           });
         }).catch((err) => {
           console.error(err);
@@ -168,10 +175,13 @@ router.delete('/users/:id', (req, res, next) => {
   }
 });
 
-// LOGOUT (delete session)
-router.delete('/session', (req, res) => {
+// LOGOUT user (delete session)
+router.get('/logout', (req, res) => {
   req.session = null;
-  res.render('pages/index');
+  res.render('pages/index', {
+    title: 'Tagline',
+    leftNavbar: 'Login',
+  });
 });
 
 module.exports = router;
