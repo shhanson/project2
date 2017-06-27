@@ -175,6 +175,13 @@ router.delete('/users/:id', (req, res, next) => {
   }
 });
 
+router.get('/manage', (req, res) => {
+  res.render('pages/manage', {
+    title: 'Manage tasks',
+    leftNavbar: req.session.id,
+  });
+});
+
 // LOGOUT user (delete session)
 router.get('/logout', (req, res) => {
   req.session = null;

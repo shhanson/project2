@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = {
 
   development: {
@@ -8,12 +6,12 @@ module.exports = {
   },
 
   test: {
-      client: 'pg',
-      connection: process.env.DATABASE_URL || 'postgres://localhost/proj2_test',
+    client: 'pg',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/proj2_test',
   },
 
   production: {
-      client: 'pg',
-      connection: process.env.DATABASE_URL || 'postgres://localhost/proj2_prod',
+    client: 'pg',
+    connection: process.env.DATABASE_URL || 'postgres://localhost/proj2_prod',
   },
 };

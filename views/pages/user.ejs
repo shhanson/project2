@@ -8,43 +8,37 @@
     <div class="col s12 m8 offset-m2">
 
         <table class='highlight bordered'>
+
           <thead>
             <tr>
               <td><h5>My Tasks</h5></td>
               <td>Count</td>
               <td>Complete</td>
-
             </tr>
           </thead>
 
           <tbody>
-
             <% for(let i = 0; i < userTasks.length; i++) { %>
               <tr>
                 <td>
                     <%=userTasks[i].description %>
                 </td>
-
                 <td>
                     <%=userTasks[i].completed_count %>
                 </td>
-
                 <td>
                     <a class="waves-effect waves-light btn"><i class="material-icons">done</i></a>
                 </td>
-
               </tr>
-
             <% } %>
-
           </tbody>
-
-
-
         </table>
 
-    </div>
+        <% if(userTasks.length === 0) { %>
+              <p>No tasks yet :( </p>
+        <% } %>
 
+    </div>
   </div>
 
 
@@ -58,41 +52,32 @@
               <td><h5>My Rewards</h5></td>
               <td>Progress</td>
               <td>Redeem</td>
-
             </tr>
           </thead>
 
           <tbody>
-
             <% for(let i = 0; i < userRewards.length; i++) { %>
               <tr>
                 <td>
                     <%=userRewards[i].description %>
                 </td>
-
                 <td>
                     <p>0/10</p>
                 </td>
-
                 <td>
                     <a class="waves-effect waves-light btn"><i class="material-icons">thumb_up</i></a>
                 </td>
-
               </tr>
-
             <% } %>
-
           </tbody>
-
-
-
         </table>
 
+        <% if(userRewards.length === 0) { %>
+              <p>No rewards yet :( </p>
+        <% } %>
+
     </div>
-
   </div>
-
-
 <div>
 
 
