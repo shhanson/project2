@@ -1,115 +1,126 @@
 <% include ../partials/header %>
 
-<% include ../partials/navbar %>
+  <% include ../partials/navbar %>
 
-<div class="container">
-
-  <div class="row">
     <div class="container">
-    <div class="col s12">
 
-      <section id="quotePlaceholder" class='center'>
+      <div class="row">
+        <div class="container">
+          <div class="col s12">
 
-      </section>
+            <section id="quotePlaceholder" class='center'>
 
-        <table class='highlight bordered'>
+            </section>
 
-          <thead>
-            <tr>
-              <td><h5 class="table-title">My Tasks</h5> <a class="btn-floating waves-effect waves-light" id="addTaskBtn" href="/tasks/add"><i class="material-icons">add</i></a></td>
-              <td>Priority</td>
-              <td class="center">Complete</td>
-            </tr>
-          </thead>
+            <table class='highlight bordered'>
 
-          <tbody>
-            <% let totalTaskCount = 0; %>
-            <% for(let i = 0; i < userTasks.length; i++) { %>
-                <% totalTaskCount += userTasks[i].completed_count %>
-              <tr>
-                <td>
-                    <%=userTasks[i].description %>
-                </td>
+              <thead>
+                <tr>
+                  <td>
+                    <h5 class="table-title">My Tasks</h5> <a class="btn-floating waves-effect waves-light" id="addTaskBtn" href="/tasks/add"><i class="material-icons">add</i></a></td>
+                  <td>Priority</td>
+                  <td>Count </td>
+                  <td class="center">Complete</td>
+                </tr>
+              </thead>
 
-                <td class='left'>
-
-                <% if(userTasks[i].priority === 'high') {%>
-                    <span class="new badge red" data-badge-caption='high'></span>
-                <%} else if(userTasks[i].priority === 'med') { %>
-                    <span class="new badge orange" data-badge-caption='med'></span>
-                <%} else { %>
-                    <span class="new badge yellow" data-badge-caption='low'></span>
-                <%}%>
+              <tbody>
+                <% let totalTaskCount = 0; %>
+                  <% for(let i = 0; i < userTasks.length; i++) { %>
+                    <% console.log("ADDED"); %>
+                    <% totalTaskCount += userTasks[i].completed_count %>
 
 
-                </td>
+                      <tr>
+                        <td>
+                          <%=userTasks[i].description %>
+                        </td>
 
-                <td class='center'>
-                    <a class="waves-effect waves-light btn completeBtn" id="task_<%=userTasks[i].id%>"><i class="material-icons">done</i></a>
-                </td>
-              </tr>
-            <% } %>
-          </tbody>
-        </table>
+                        <td class='left'>
 
-        <% if(userTasks.length === 0) { %>
+                          <% if(userTasks[i].priority === 'high') {%>
+                            <span class="new badge red" data-badge-caption='high'></span>
+                            <%} else if(userTasks[i].priority === 'med') { %>
+                              <span class="new badge orange" data-badge-caption='med'></span>
+                              <%} else { %>
+                                <span class="new badge yellow" data-badge-caption='low'></span>
+                                <%}%>
+
+
+                        </td>
+
+                        <td> <%=userTasks[i].completed_count %></td>
+
+                        <td class='center'>
+                          <a class="waves-effect waves-light btn completeBtn" id="task_<%=userTasks[i].id%>"><i class="material-icons">done</i></a>
+                        </td>
+                      </tr>
+                      <% } %>
+                      <% console.log("TOTAL TASK COUNT: " + totalTaskCount); %>
+              </tbody>
+            </table>
+
+            <% if(userTasks.length === 0) { %>
               <p>No tasks yet :( </p>
-        <% } %>
+              <% } %>
 
 
 
 
 
 
+          </div>
         </div>
-    </div>
-  </div>
+      </div>
 
 
 
-  <div class="row">
-  <div class="container">
-    <div class="col s12">
+      <div class="row">
+        <div class="container">
+          <div class="col s12">
 
-        <table class='highlight bordered'>
-          <thead>
-            <tr>
-              <td><h5 class="table-title">My Rewards</h5> <a class="btn-floating waves-effect waves-light" id="addRewardBtn" href="/rewards/add"><i class="material-icons">add</i></a></td>
-              <td class='center'>Progress</td>
-              <td class='center'>Redeem</td>
-            </tr>
-          </thead>
+            <table class='highlight bordered'>
+              <thead>
+                <tr>
+                  <td>
+                    <h5 class="table-title">My Rewards</h5> <a class="btn-floating waves-effect waves-light" id="addRewardBtn" href="/rewards/add"><i class="material-icons">add</i></a></td>
+                  <td class='center'>Progress</td>
+                  <td class='center'>Redeem</td>
+                </tr>
+              </thead>
 
-          <tbody>
-            <% for(let i = 0; i < userRewards.length; i++) { %>
-              <tr>
-                <td>
-                    <%=userRewards[i].description %>
-                </td>
-                <td class='center'>
-                    <%=totalTaskCount%> / <%=userRewards[i].value%>
-                </td>
-                <td class='center'>
-                  <% if(totalTaskCount < userRewards[i].value) { %>
-                    <a class="waves-effect waves-light btn redeemBtn disabled" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
+              <tbody>
+                <% for(let i = 0; i < userRewards.length; i++) { %>
+                  <tr>
+                    <td>
+                      <%=userRewards[i].description %>
+                    </td>
+                    <td class='center'>
+                      <%=totalTaskCount%> /
+                        <%=userRewards[i].value%>
 
-                  <%} else { %>
-                    <a class="waves-effect waves-light btn redeemBtn" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
-                  <%}%>
-                </td>
-              </tr>
-            <% } %>
-          </tbody>
-        </table>
+                    </td>
+                    <td class='center'>
+                      <% if(totalTaskCount < userRewards[i].value) { %>
+                        <a class="waves-effect waves-light btn redeemBtn disabled" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
 
-        <% if(userRewards.length === 0) { %>
+                        <%} else { %>
+                          <a class="waves-effect waves-light btn redeemBtn" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
+                          <%}%>
+                    </td>
+                  </tr>
+                  <% } %>
+              </tbody>
+            </table>
+
+            <% if(userRewards.length === 0) { %>
               <p>No rewards yet :( </p>
-        <% } %>
+              <% } %>
 
-</div>
-    </div>
-  </div>
-<div>
+          </div>
+        </div>
+      </div>
+      <div>
 
 
 <% include ../partials/footer %>

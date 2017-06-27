@@ -18,11 +18,11 @@ router.use(bodyParser.urlencoded({
 }));
 
 function getTasksForUser(userID) {
-  return knex('users_tasks').join('tasks', 'users_tasks.task_id', 'tasks.id').where('users_tasks.user_id', userID);
+  return knex('users_tasks').join('tasks', 'users_tasks.task_id', 'tasks.id').where('users_tasks.user_id', userID).orderBy('tasks.created_at');
 }
 
 function getRewardsForUser(userID) {
-  return knex('users_rewards').join('rewards', 'users_rewards.reward_id', 'rewards.id').where('users_rewards.user_id', userID).orderBy('rewards.value');
+  return knex('users_rewards').join('rewards', 'users_rewards.reward_id', 'rewards.id').where('users_rewards.user_id', userID);
 }
 
 function getTasksRewardsForUser(userID) {

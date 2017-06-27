@@ -63,21 +63,14 @@ router.post('/tasks', ev(validations.post), (req, res, next) => {
   });
 });
 
-router.put('/tasks/:id', ev(validations.put), (req, res, next) => {
+router.put('/tasks/:id', (req, res, next) => {
   const taskID = Number.parseInt(req.params.id);
   if (!utils.isValidID(taskID)) {
     next();
   } else {
-    knex('tasks').where('id', taskID).returning('*').update({
-      description: req.body.description,
-      priority: req.body.priority,
-      completed_count: req.body.completed_count,
-    })
-    .then((updatedTask) => {
-            // Render user page-- how to get user ID???
-      res.json(updatedTask);
-    })
-    .catch((err) => {
+    knex('tasks').increment('completed_count', 1).where('id', taskID).then(() => {
+      res.json(req.session.id);
+    }).catch((err) => {
       console.error(err);
       knex.destroy();
       next(err);
