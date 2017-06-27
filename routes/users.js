@@ -22,7 +22,7 @@ function getTasksForUser(userID) {
 }
 
 function getRewardsForUser(userID) {
-  return knex('users_rewards').join('rewards', 'users_rewards.reward_id', 'rewards.id').where('users_rewards.user_id', userID);
+  return knex('users_rewards').join('rewards', 'users_rewards.reward_id', 'rewards.id').where('users_rewards.user_id', userID).orderBy('rewards.value');
 }
 
 function getTasksRewardsForUser(userID) {

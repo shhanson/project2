@@ -2,3 +2,8 @@
   display: inline;
   vertical-align: middle;
 }
+
+input {
+  width: 60%;
+  margin: 10px;
+}

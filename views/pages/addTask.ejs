@@ -5,11 +5,13 @@
     <div class="container">
 
       <div class="row">
-        <div class="col s12 m5 offset-m3">
+        <div class="container">
+        <div class="col s12">
           <form id="addTaskForm" name="addTaskForm">
 
             <label for='description'>Task description:</label>
-            <input type='text' id='description' name='description' required> Priority:
+            <input type='text' id='description' name='description' required>
+            Priority:
             <br>
 
 
@@ -24,17 +26,21 @@
             <input name='priority' type='radio' id='highp' class='with-gap' value='high'>
             <label for='highp'>High</label><br>
 
-            <button class="btn waves-effect waves-light right" type='submit' id='addTaskSubmit'>Add task
+            <div class="center">
+            <button class="btn waves-effect waves-light" type='submit' id='addTaskSubmit'>Add task
               </button>
+
+            </div>
 
 
           </form>
 
         </div>
+      </div>
 
       </div>
 
     </div>
 
 
-    <% include ../partials/footer %>
+<% include ../partials/footer %>

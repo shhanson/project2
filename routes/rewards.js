@@ -34,16 +34,26 @@ router.get('/rewards/:id', (req, res, next) => {
 router.get('/rewards/add', (req, res, next) => {
   res.render('pages/addReward', {
     title: 'Add a Reward',
+    leftNavbar: req.session.id,
+    script: '/js/addReward.js',
   });
 });
 
 router.post('/rewards', ev(validations.post), (req, res, next) => {
-  knex('rewards').insert({
+  knex('rewards').returning('id').insert({
     description: req.body.description,
     value: req.body.value,
-  }).then(() => {
-    // Render user page-- how to get user ID???
-    res.sendStatus(200);
+  }).then((rewardID) => {
+    knex('users_rewards').insert({
+      user_id: req.session.id,
+      reward_id: rewardID[0],
+    }).then(() => {
+      res.json(req.session.id);
+    }).catch((err) => {
+      console.error(err);
+      knex.destroy();
+      next(err);
+    });
   }).catch((err) => {
     console.error(err);
     knex.destroy();

@@ -14,8 +14,6 @@ $(document).ready(() => {
   // code for each reward_id btn
   $('.redeemBtn').click((event) => {
 
-    // DELETE request to remove redeemed reward_id
-
 
   });
 });

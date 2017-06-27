@@ -50,14 +50,13 @@ router.post('/tasks', ev(validations.post), (req, res, next) => {
       task_id: taskID[0],
     }).then(() => {
       res.json(req.session.id);
-      // res.sendStatus(200);
     }).catch((err) => {
       console.error(err);
       knex.destroy();
       next(err);
     });
-    // res.sendStatus(200);
-  }).catch((err) => {
+  })
+  .catch((err) => {
     console.error(err);
     knex.destroy();
     next(err);
