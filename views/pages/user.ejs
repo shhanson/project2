@@ -16,8 +16,9 @@
           <thead>
             <tr>
               <td><h5 class="table-title">My Tasks</h5> <a class="btn-floating waves-effect waves-light" id="addTaskBtn" href="/tasks/add"><i class="material-icons">add</i></a></td>
-              <td>Count</td>
-              <td>Complete</td>
+              <td class="center">Priority</td>
+              <td class="center">Count</td>
+              <td class="center">Complete</td>
             </tr>
           </thead>
 
@@ -29,10 +30,22 @@
                 <td>
                     <%=userTasks[i].description %>
                 </td>
-                <td>
+
+                <td class="left">
+
+                <% if(userTasks[i].priority === 'high') {%>
+                    <span class="new badge red" data-badge-caption='high'></span>
+                <%} else if(userTasks[i].priority === 'med') { %>
+                    <span class="new badge orange" data-badge-caption='med'></span>
+                <%} else { %>
+                    <span class="new badge yellow" data-badge-caption='low'></span>
+                <%}%>
+
+
+                </td> <td class="center">
                     <%=userTasks[i].completed_count %>
                 </td>
-                <td>
+                <td class='center'>
                     <a class="waves-effect waves-light btn completeBtn" id="task_<%=userTasks[i].id%>"><i class="material-icons">done</i></a>
                 </td>
               </tr>
@@ -62,8 +75,8 @@
           <thead>
             <tr>
               <td><h5 class="table-title">My Rewards</h5> <a class="btn-floating waves-effect waves-light" id="addRewardBtn" href="/rewards/add"><i class="material-icons">add</i></a></td>
-              <td>Progress</td>
-              <td>Redeem</td>
+              <td class='center'>Progress</td>
+              <td class='center'>Redeem</td>
             </tr>
           </thead>
 
@@ -73,10 +86,10 @@
                 <td>
                     <%=userRewards[i].description %>
                 </td>
-                <td>
-                    <p><%=totalTaskCount%> / <%=userRewards[i].value%></p>
+                <td class='center'>
+                    <%=totalTaskCount%> / <%=userRewards[i].value%>
                 </td>
-                <td>
+                <td class='center'>
                     <a class="waves-effect waves-light btn redeemBtn" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
                 </td>
               </tr>

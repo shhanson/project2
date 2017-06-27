@@ -34,17 +34,29 @@ router.get('/tasks/:id', (req, res, next) => {
 router.get('/tasks/add', (req, res, next) => {
   res.render('pages/addTask', {
     title: 'Add a Task',
+    leftNavbar: req.session.id,
+    script: '/js/addTask.js',
   });
 });
 
 router.post('/tasks', ev(validations.post), (req, res, next) => {
-  knex('tasks').insert({
+  knex('tasks').returning('id').insert({
     description: req.body.description,
     priority: req.body.priority || 'med',
     completed_count: 0,
-  }).then(() => {
-        // how to get user/session ID????
-    res.sendStatus(200);
+  }).then((taskID) => {
+    knex('users_tasks').insert({
+      user_id: req.session.id,
+      task_id: taskID[0],
+    }).then(() => {
+      res.json(req.session.id);
+      // res.sendStatus(200);
+    }).catch((err) => {
+      console.error(err);
+      knex.destroy();
+      next(err);
+    });
+    // res.sendStatus(200);
   }).catch((err) => {
     console.error(err);
     knex.destroy();
