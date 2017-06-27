@@ -31,6 +31,12 @@ router.get('/rewards/:id', (req, res, next) => {
   }
 });
 
+router.get('/rewards/add', (req, res, next) => {
+  res.render('pages/addReward', {
+    title: 'Add a Reward',
+  });
+});
+
 router.post('/rewards', ev(validations.post), (req, res, next) => {
   knex('rewards').insert({
     description: req.body.description,

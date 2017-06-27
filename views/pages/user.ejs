@@ -7,18 +7,24 @@
   <div class="row">
     <div class="col s12 m8 offset-m2">
 
+      <section id="quotePlaceholder" class='center'>
+
+      </section>
+
         <table class='highlight bordered'>
 
           <thead>
             <tr>
-              <td><h5>My Tasks</h5></td>
+              <td><h5 class="table-title">My Tasks</h5> <a class="btn-floating waves-effect waves-light" id="addTaskBtn" href="/tasks/add"><i class="material-icons">add</i></a></td>
               <td>Count</td>
               <td>Complete</td>
             </tr>
           </thead>
 
           <tbody>
+            <% let totalTaskCount = 0; %>
             <% for(let i = 0; i < userTasks.length; i++) { %>
+                <% totalTaskCount += userTasks[i].completed_count %>
               <tr>
                 <td>
                     <%=userTasks[i].description %>
@@ -27,7 +33,7 @@
                     <%=userTasks[i].completed_count %>
                 </td>
                 <td>
-                    <a class="waves-effect waves-light btn"><i class="material-icons">done</i></a>
+                    <a class="waves-effect waves-light btn completeBtn" id="task_<%=userTasks[i].id%>"><i class="material-icons">done</i></a>
                 </td>
               </tr>
             <% } %>
@@ -37,6 +43,12 @@
         <% if(userTasks.length === 0) { %>
               <p>No tasks yet :( </p>
         <% } %>
+
+
+
+
+
+
 
     </div>
   </div>
@@ -49,7 +61,7 @@
         <table class='highlight bordered'>
           <thead>
             <tr>
-              <td><h5>My Rewards</h5></td>
+              <td><h5 class="table-title">My Rewards</h5> <a class="btn-floating waves-effect waves-light" id="addRewardBtn" href="/rewards/add"><i class="material-icons">add</i></a></td>
               <td>Progress</td>
               <td>Redeem</td>
             </tr>
@@ -62,10 +74,10 @@
                     <%=userRewards[i].description %>
                 </td>
                 <td>
-                    <p>0/10</p>
+                    <p><%=totalTaskCount%> / <%=userRewards[i].value%></p>
                 </td>
                 <td>
-                    <a class="waves-effect waves-light btn"><i class="material-icons">thumb_up</i></a>
+                    <a class="waves-effect waves-light btn redeemBtn" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
                 </td>
               </tr>
             <% } %>

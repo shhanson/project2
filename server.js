@@ -50,7 +50,7 @@ app.get('/login', (req, res) => {
 
 app.get('/register', (req, res) => {
   res.render('pages/register', {
-    title: 'New user registration',
+    title: 'New User Registration',
   });
 });
 

@@ -31,6 +31,12 @@ router.get('/tasks/:id', (req, res, next) => {
   }
 });
 
+router.get('/tasks/add', (req, res, next) => {
+  res.render('pages/addTask', {
+    title: 'Add a Task',
+  });
+});
+
 router.post('/tasks', ev(validations.post), (req, res, next) => {
   knex('tasks').insert({
     description: req.body.description,

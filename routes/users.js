@@ -72,6 +72,7 @@ router.get('/users/:id', (req, res, next) => {
         userTasks: result[0],
         userRewards: result[1],
         leftNavbar: userID,
+        script: '/js/user.js',
       });
     }).catch((err) => {
       console.error(err);
