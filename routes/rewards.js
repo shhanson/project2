@@ -72,7 +72,9 @@ router.put('/rewards/:id', ev(validations.put), (req, res, next) => {
     })
     .then((updatedReward) => {
             // Render user page-- how to get user ID???
-      res.json(updatedReward);
+      // res.json(updatedReward);
+      // res.json(req.session.id);
+      res.sendStatus(200);
     })
     .catch((err) => {
       console.error(err);
@@ -89,6 +91,7 @@ router.delete('/rewards/:id', (req, res, next) => {
   } else {
     knex('users_rewards').where('reward_id', rewardID).del().then(() => {
       knex('rewards').where('id', rewardID).del().then(() => {
+        // res.redirect(`/users/${req.session.id}`);
         res.sendStatus(200);
       })
       .catch((err) => {

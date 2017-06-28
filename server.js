@@ -35,7 +35,7 @@ app.use(rewardsRouter);
 
 // Render index page
 app.get('/', (req, res) => {
-  const leftNavbar = req.session.id || 'Login';
+  const leftNavbar = req.session.id || -1;
   res.render('pages/index', {
     title: 'Habit tracker tagline',
     leftNavbar,

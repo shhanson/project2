@@ -94,9 +94,7 @@ router.post('/users', ev(validations.reg_post), (req, res, next) => {
       email: req.body.email,
       hashed_password: digest,
     }).then(() => {
-      res.render('pages/login', {
-        title: 'Login',
-      });
+      res.redirect('/login');
     }).catch((err) => {
       console.error(err);
       knex.destroy();
@@ -135,7 +133,7 @@ router.post('/session', ev(validations.login_post), (req, res, next) => {
     // email not found
     err.status = 401;
     console.error('Wrong email or password!');
-    knex.destroy();
+    // knex.destroy();
     next(err);
   });
 });
@@ -174,10 +172,7 @@ router.get('/manage', (req, res) => {
 // LOGOUT user (delete session)
 router.get('/logout', (req, res) => {
   req.session = null;
-  res.render('pages/index', {
-    title: 'Tagline',
-    leftNavbar: 'Login',
-  });
+  res.redirect('/');
 });
 
 module.exports = router;
