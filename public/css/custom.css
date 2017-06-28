@@ -8,10 +8,21 @@ input {
   /*margin: 10px;*/
 }
 
-#rewardsTable {
+/*#rewardsTable {
   display: none;
 }
 
 #showTasks {
   display: none;
+}*/
+
+blockquote {
+  font-style: italic;
+  font-size: large;
+}
+
+#dismissQuote{
+  font-style: italic;
+  font-size: small;
+  text-decoration: underline;
 }

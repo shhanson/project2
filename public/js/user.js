@@ -1,7 +1,27 @@
 $(document).ready(() => {
-  console.log('ready!');
-
   const toastMessages = ['Great job!', 'Keep it up!', 'Wow!!', 'Awesome!'];
+
+
+  $.ajax({
+    type: 'GET',
+    url: 'http://galvanize-cors-proxy.herokuapp.com/http://api.forismatic.com/api/1.0/',
+    data: {
+      method: 'getQuote',
+      lang: 'en',
+      format: 'text',
+    },
+    success: (response) => {
+      $('#quotePlaceholder').text(response);
+    },
+  }).error(() => {
+    console.error('Quote error!');
+  });
+
+
+  $('#dismissQuote').click(() => {
+    $('#quotePlaceholder').toggle();
+    $('#dismissQuote').toggle();
+  });
 
   // code for each task_id btn
   $('.completeBtn').on('click', (event) => {
