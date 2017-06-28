@@ -8,7 +8,7 @@ $(document).ready(() => {
     const clickedTaskID = $(event.currentTarget).attr('id').match(/\d+/)[0];
     $.ajax({
       type: 'PUT',
-      url: `/tasks/${clickedTaskID}`,
+      url: `/tasks/increment/${clickedTaskID}`,
       data: {
         completed_count: 1,
       },

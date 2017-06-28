@@ -29,13 +29,13 @@
                 <% for(let i = 0; i < userTasks.length; i++) { %>
                   <tr>
                     <td>
-                      <input class='browser-default' type='text' id='tdescrip_<%=userTasks[i].id %>' value='<%=userTasks[i].description %>'>
+                      <input class='browser-default taskDescription' type='text' id='tdescrip_<%=userTasks[i].id %>' value='<%=userTasks[i].description %>'>
                     </td>
 
                     <td>
 
 
-                    <select class="browser-default" id='tpriority_<%=userTasks[i].id%>'>
+                    <select class="browser-default taskPriority" id='tpriority_<%=userTasks[i].id%>'>
 
                     <%if(userTasks[i].priority === 'high'){ %>
                       <option value='low'>Low</option>
@@ -66,7 +66,7 @@
 
                     <td class='center'>
 
-                      <a class="waves-effect waves-light btn updateTaskBtn" id="tupdate_<%=userTasks[i].id%>">Save</a>
+                      <a class="waves-effect waves-light btn updateTaskBtn" id="tupdate_<%=userTasks[i].id%>" disabled>Save</a>
 
                     </td>
                   </tr>
@@ -100,10 +100,10 @@
                 <% for(let i = 0; i < userRewards.length; i++) { %>
                   <tr>
                     <td>
-                      <input class='browser-default' type='text' id='rdescrip_<%=userRewards[i].id%>' value='<%=userRewards[i].description%>'>
+                      <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value='<%=userRewards[i].description%>'>
                     </td>
                     <td class='center'>
-                      <input class='browser-default' type='number' id='rvalue_<%=userRewards[i].id%>' value='<%=userRewards[i].value%>'>
+                      <input class='browser-default rewardValue' type='number' id='rvalue_<%=userRewards[i].id%>' value='<%=userRewards[i].value%>'>
                     </td>
                     <td class='center'>
 
@@ -113,7 +113,7 @@
 
                     <td class='center'>
 
-                    <a class="waves-effect waves-light btn updateRewardBtn" id="rupdate_<%=userRewards[i].id%>">Save</a>
+                    <a class="waves-effect waves-light btn updateRewardBtn" id="rupdate_<%=userRewards[i].id%>" disabled>Save</a>
 
                     </td>
                   </tr>

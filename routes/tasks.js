@@ -63,14 +63,36 @@ router.post('/tasks', ev(validations.post), (req, res, next) => {
   });
 });
 
-router.put('/tasks/:id', (req, res, next) => {
+router.put('/tasks/increment/:id', (req, res, next) => {
   const taskID = Number.parseInt(req.params.id);
   if (!utils.isValidID(taskID)) {
     next();
   } else {
     knex('tasks').increment('completed_count', 1).where('id', taskID).then(() => {
-      res.json(req.session.id);
-    }).catch((err) => {
+      // res.json(req.session.id);
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      knex.destroy();
+      next(err);
+    });
+  }
+});
+
+router.put('/tasks/edit/:id', ev(validations.put), (req, res, next) => {
+  const taskID = Number.parseInt(req.params.id);
+  if (!utils.isValidID(taskID)) {
+    next();
+  } else {
+    knex('tasks').where('id', taskID).update({
+      description: req.body.description,
+      priority: req.body.priority,
+      completed_count: undefined,
+    }).then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
       console.error(err);
       knex.destroy();
       next(err);
