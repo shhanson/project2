@@ -5,7 +5,6 @@ const knex = require('../util/knex');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const utils = require('../util/utils');
-const _ = require('lodash');
 
 // Validation setup
 const ev = require('express-validation');
@@ -162,11 +161,29 @@ router.delete('/users/:id', (req, res, next) => {
   }
 });
 
-router.get('/manage', (req, res) => {
-  res.render('pages/manage', {
-    title: 'Manage tasks',
-    leftNavbar: req.session.id,
-  });
+router.get('/users/manage/:id', (req, res, next) => {
+  const userID = Number.parseInt(req.params.id);
+  if (!utils.isValidID(userID)) {
+    next();
+  } else if (userID === req.session.id) {
+    getTasksRewardsForUser(userID).then((result) => {
+      res.render('pages/manage', {
+        title: 'Edit Tasks and Rewards',
+        userTasks: result[0],
+        userRewards: result[1],
+        leftNavbar: userID,
+        script: '/js/manage.js',
+      });
+    }).catch((err) => {
+      console.error(err);
+      knex.destroy();
+      next(err);
+    });
+  } else {
+    const err = new Error('Not authorized!');
+    err.status = 401;
+    next(err);
+  }
 });
 
 // LOGOUT user (delete session)

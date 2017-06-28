@@ -13,7 +13,6 @@ $(document).ready(() => {
         completed_count: 1,
       },
       success: () => {
-        // location.reload();
         Materialize.toast(toastMessages[Math.floor(Math.random() * toastMessages.length)], 2000, 'rounded green');
         setTimeout(location.reload.bind(location), 2000);
       },
@@ -29,10 +28,6 @@ $(document).ready(() => {
   });
 
   $('#showRewards').click(() => {
-    // $('#tasksTable').addClass('hide');
-    // $('#rewardsTable').removeClass('hide');
-    // $('#showRewards').addClass('hide');
-    // $('#showTasks').removeClass('hide');
     $('#tasksTable').toggle();
     $('#rewardsTable').toggle();
     $('#showRewards').toggle();
@@ -40,11 +35,6 @@ $(document).ready(() => {
   });
 
   $('#showTasks').click(() => {
-    // $('#rewardsTable').addClass('hide');
-    // $('#tasksTable').removeClass('hide');
-    // $('#showTasks').addClass('hide');
-    // $('#showRewards').removeClass('hide');
-
     $('#rewardsTable').toggle();
     $('#tasksTable').toggle();
     $('#showTasks').toggle();

@@ -1,9 +1,154 @@
 <% include ../partials/header %>
 
-<% include ../partials/navbar %>
-
-  <h4>Manage!</h4>
+  <% include ../partials/navbar %>
 
 
+    <div class="container">
 
-<% include ../partials/footer %>
+      <div class="row">
+
+
+        <div class="container">
+          <div class="col s12">
+
+            <form id="editTasksForm">
+
+            <table class='highlight bordered' id='tasksTable'>
+
+              <thead>
+                <tr>
+                  <td>
+                    <h5 class="table-title">Edit Tasks</h5></td>
+                  <td class="center">Priority</td>
+                  <td class="center">Delete</td>
+                  <td class='center'>Update</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% for(let i = 0; i < userTasks.length; i++) { %>
+                  <tr>
+                    <td>
+                      <input class='browser-default' type='text' id='taskDescription' value='<%=userTasks[i].description %>'>
+                    </td>
+
+                    <td>
+
+
+                    <select class="browser-default" id='taskPriority'>
+
+                    <%if(userTasks[i].priority === 'high'){ %>
+                      <option value='low'>Low</option>
+                      <option value='med'>Med</option>
+                      <option value='high' selected>High</option>
+
+                    <%} else if(userTasks[i].priority === 'med') {%>
+
+                      <option value='low'>Low</option>
+                      <option value='med' selected>Med</option>
+                      <option value='high'>High</option>
+
+                    <%} else { %>
+
+                      <option value='low' selected>Low</option>
+                      <option value='med'>Med</option>
+                      <option value='high'>High</option>
+
+                    <%} %>
+
+                    </select>
+
+
+
+                    </td>
+
+
+                    <td class='center'>
+                      <a class="waves-effect waves-light btn red deleteTaskBtn" id="tdel_<%=userTasks[i].id%>"><i class="material-icons">delete</i></a>
+                    </td>
+
+                    <td class='center'>
+
+                      <a class="waves-effect waves-light btn updateTaskBtn" id="tupdate_<%=userTasks[i].id%>">Save</a>
+
+                    </td>
+                  </tr>
+                  <% } %>
+              </tbody>
+            </table>
+          </form>
+
+
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="container">
+          <div class="col s12">
+
+            <table class='highlight bordered' id="rewardsTable">
+              <thead>
+                <tr>
+                  <td>
+                    <h5 class="table-title">My Rewards</h5> <a class="btn-floating waves-effect waves-light" id="addRewardBtn" href="/rewards/add"><i class="material-icons">add</i></a></td>
+                  <td class='center'>Progress</td>
+                  <td class='center'>Redeem</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% for(let i = 0; i < userRewards.length; i++) { %>
+                  <tr>
+                    <td>
+                      <%=userRewards[i].description %>
+                    </td>
+                    <td class='center'>
+
+                        <%=userRewards[i].value%>
+
+                    </td>
+                    <td class='center'>
+
+                    </td>
+                  </tr>
+                  <% } %>
+              </tbody>
+            </table>
+
+
+
+          </div>
+        </div>
+
+
+      </div>
+
+      <div class="row center">
+
+        <div class="container">
+
+          <div class="col s12">
+
+
+
+            <a href="#"><span id="showRewards">View rewards > </span></a>
+          </div>
+
+
+          <div class="col s12">
+
+            <a href="#"><span id="showTasks">< View tasks</span></a>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div>
+
+        <% include ../partials/footer %>
