@@ -44,8 +44,10 @@ router.get('/users', (req, res, next) => {
   if (req.session.isAdmin) {
     knex('users').then((allUsers) => {
       res.render('pages/users', {
+        title: 'Hello admin!',
         allUserData: allUsers,
         leftNavbar: req.session.id,
+        script: '/js/adminUsers.js',
       });
     }).catch((err) => {
       console.error(err);

@@ -1,0 +1,54 @@
+<% include ../partials/header %>
+
+<% include ../partials/navbar %>
+
+<div class="container">
+  <div class="row">
+
+    <div class="container">
+
+      <div class="col s12">
+
+        <table>
+
+          <thead>
+            <tr>
+              <td>ID</td>
+              <td>Email</td>
+              <td>Nickname</td>
+              <td>Admin?</td>
+              <td>Delete</td>
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <% for(let i = 0; i < allUserData.length; i++){ %>
+
+                <tr>
+                  <td><%=allUserData[i].id%></td>
+                  <td><%=allUserData[i].email%></td>
+                  <td><%=allUserData[i].nickname%></td>
+                  <td><%=allUserData[i].is_admin%></td>
+                  <td><a class="waves-effect waves-light btn deleteUserBtn" id='<%=allUserData[i].id%>'>DELETE</a></td>
+
+                </tr>
+
+            <%}%>
+
+          </tbody>
+
+
+        </table>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+<% include ../partials/footer %>
