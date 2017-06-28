@@ -3,9 +3,9 @@
     <a href="/" class="brand-logo">Habit Tracker</a>
 
 
-    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-    <ul class="right hide-on-med-and-down">
+    <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons hide-on-med-and-up">menu</i></a>
 
+    <ul class="right hide-on-small-and-down">
       <% if(leftNavbar === -1) { %>
         <li><a href="/login">Login</a></li>
       <%} else { %>
@@ -13,8 +13,8 @@
         <li><a href="/manage">Manage</a></li>
         <li><a href="/logout">Logout</a></li>
       <% }%>
-
     </ul>
+
     <ul class="side-nav" id="mobile-demo">
       <% if (leftNavbar === -1) { %>
         <li><a href="/login">Login</a></li>
