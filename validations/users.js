@@ -16,5 +16,6 @@ module.exports.reg_post = {
     password: Joi.string().label('password').required()
     .min(8),
     vpassword: Joi.ref('password'),
+    nickname: Joi.string().label('nickname').max(16),
   },
 };

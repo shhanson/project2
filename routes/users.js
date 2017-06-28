@@ -66,11 +66,14 @@ router.get('/users/:id', (req, res, next) => {
   if (!utils.isValidID(userID)) {
     next();
   } else if (userID === req.session.id) {
-    getTasksRewardsForUser(userID).then((result) => {
+    Promise.all([
+      getTasksRewardsForUser(userID),
+      knex('users').returning('nickname').where('id', userID),
+    ]).then((result) => {
       res.render('pages/user', {
-        title: 'Hello, user!',
-        userTasks: result[0],
-        userRewards: result[1],
+        title: `Hello, ${result[1][0].nickname}!`,
+        userTasks: result[0][0],
+        userRewards: result[0][1],
         leftNavbar: userID,
         script: '/js/user.js',
       });
@@ -92,6 +95,7 @@ router.post('/users', ev(validations.reg_post), (req, res, next) => {
     knex('users').insert({
       email: req.body.email,
       hashed_password: digest,
+      nickname: req.body.nickname,
     }).then(() => {
       res.redirect('/login');
     }).catch((err) => {
