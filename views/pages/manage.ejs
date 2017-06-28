@@ -11,7 +11,7 @@
         <div class="container">
           <div class="col s12">
 
-            <form id="editTasksForm">
+
 
             <table class='highlight bordered' id='tasksTable'>
 
@@ -29,13 +29,13 @@
                 <% for(let i = 0; i < userTasks.length; i++) { %>
                   <tr>
                     <td>
-                      <input class='browser-default' type='text' id='taskDescription' value='<%=userTasks[i].description %>'>
+                      <input class='browser-default' type='text' id='tdescrip_<%=userTasks[i].id %>' value='<%=userTasks[i].description %>'>
                     </td>
 
                     <td>
 
 
-                    <select class="browser-default" id='taskPriority'>
+                    <select class="browser-default" id='tpriority_<%=userTasks[i].id%>'>
 
                     <%if(userTasks[i].priority === 'high'){ %>
                       <option value='low'>Low</option>
@@ -58,10 +58,7 @@
 
                     </select>
 
-
-
                     </td>
-
 
                     <td class='center'>
                       <a class="waves-effect waves-light btn red deleteTaskBtn" id="tdel_<%=userTasks[i].id%>"><i class="material-icons">delete</i></a>
@@ -76,7 +73,6 @@
                   <% } %>
               </tbody>
             </table>
-          </form>
 
 
 
@@ -93,10 +89,10 @@
             <table class='highlight bordered' id="rewardsTable">
               <thead>
                 <tr>
-                  <td>
-                    <h5 class="table-title">My Rewards</h5> <a class="btn-floating waves-effect waves-light" id="addRewardBtn" href="/rewards/add"><i class="material-icons">add</i></a></td>
-                  <td class='center'>Progress</td>
-                  <td class='center'>Redeem</td>
+                  <td><h5 class="table-title">Edit Rewards</h5></td>
+                  <td class='center'>Value</td>
+                  <td class='center'>Delete</td>
+                  <td class='center'>Update</td>
                 </tr>
               </thead>
 
@@ -104,14 +100,20 @@
                 <% for(let i = 0; i < userRewards.length; i++) { %>
                   <tr>
                     <td>
-                      <%=userRewards[i].description %>
+                      <input class='browser-default' type='text' id='rdescrip_<%=userRewards[i].id%>' value='<%=userRewards[i].description%>'>
+                    </td>
+                    <td class='center'>
+                      <input class='browser-default' type='number' id='rvalue_<%=userRewards[i].id%>' value='<%=userRewards[i].value%>'>
                     </td>
                     <td class='center'>
 
-                        <%=userRewards[i].value%>
+                    <a class="waves-effect waves-light btn red deleteRewardBtn" id="rdel_<%=userRewards[i].id%>"><i class="material-icons">delete</i></a>
 
                     </td>
+
                     <td class='center'>
+
+                    <a class="waves-effect waves-light btn updateRewardBtn" id="rupdate_<%=userRewards[i].id%>">Save</a>
 
                     </td>
                   </tr>
@@ -135,13 +137,13 @@
 
 
 
-            <a href="#"><span id="showRewards">View rewards > </span></a>
+            <a href="#"><span id="showRewards">Manage rewards > </span></a>
           </div>
 
 
           <div class="col s12">
 
-            <a href="#"><span id="showTasks">< View tasks</span></a>
+            <a href="#"><span id="showTasks">< Manage tasks</span></a>
           </div>
 
         </div>
@@ -151,4 +153,4 @@
 
       <div>
 
-        <% include ../partials/footer %>
+<% include ../partials/footer %>
