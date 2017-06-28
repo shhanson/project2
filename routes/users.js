@@ -63,9 +63,8 @@ router.get('/users', (req, res, next) => {
 // GET a user with the given ID
 router.get('/users/:id', (req, res, next) => {
   const userID = Number.parseInt(req.params.id);
-  if (!utils.isValidID(userID)) {
-    next();
-  } else if (userID === req.session.id) {
+
+  if (utils.isValidID(userID) && userID === req.session.id) {
     Promise.all([
       getTasksRewardsForUser(userID),
       knex('users').returning('nickname').where('id', userID),
@@ -136,40 +135,45 @@ router.post('/session', ev(validations.login_post), (req, res, next) => {
     // email not found
     err.status = 401;
     console.error('Wrong email or password!');
-    // knex.destroy();
     next(err);
   });
 });
 
 // DELETE a user (superuser) only
 router.delete('/users/:id', (req, res, next) => {
-  const userID = Number.parseInt(req.params.id);
-  if (!utils.isValidID(userID)) {
-    next();
-  } else {
-    deleteUserFromJoinTables(userID).then(() => {
-      knex('users').where('id', userID).del().then(() => {
-        res.sendStatus(200);
+  if (req.session.isAdmin) {
+    const userID = Number.parseInt(req.params.id);
+
+    if (!utils.isValidID(userID)) {
+      next();
+    } else {
+      deleteUserFromJoinTables(userID).then(() => {
+        knex('users').where('id', userID).del().then(() => {
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.error(err);
+          knex.destroy();
+          next(err);
+        });
       })
       .catch((err) => {
         console.error(err);
         knex.destroy();
         next(err);
       });
-    })
-    .catch((err) => {
-      console.error(err);
-      knex.destroy();
-      next(err);
-    });
+    }
+  } else {
+    const err = new Error('Not authorized!');
+    err.status = 401;
+    next(err);
   }
 });
 
 router.get('/users/manage/:id', (req, res, next) => {
   const userID = Number.parseInt(req.params.id);
-  if (!utils.isValidID(userID)) {
-    next();
-  } else if (userID === req.session.id) {
+
+  if (utils.isValidID(userID) && userID === req.session.id) {
     getTasksRewardsForUser(userID).then((result) => {
       res.render('pages/manage', {
         title: 'Edit Tasks and Rewards',
