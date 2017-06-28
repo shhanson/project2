@@ -81,24 +81,29 @@
 
               <tbody>
                 <% for(let i = 0; i < userRewards.length; i++) { %>
-                  <tr>
-                    <td>
-                      <%=userRewards[i].description %>
-                    </td>
-                    <td class='center'>
-                      <%=totalTaskCount%> /
-                        <%=userRewards[i].value%>
 
-                    </td>
-                    <td class='center'>
-                      <% if(totalTaskCount < userRewards[i].value) { %>
-                        <a class="waves-effect waves-light btn redeemBtn disabled" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
+                  <%if(!userRewards[i].redeemed){ %>
+                    <tr>
+                      <td>
+                        <%=userRewards[i].description %>
+                      </td>
+                      <td class='center'>
+                        <%=totalTaskCount%> /
+                          <%=userRewards[i].value%>
 
-                        <%} else { %>
-                          <a class="waves-effect waves-light btn redeemBtn" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
-                          <%}%>
-                    </td>
-                  </tr>
+                      </td>
+                      <td class='center'>
+                        <% if(totalTaskCount < userRewards[i].value) { %>
+                          <a class="waves-effect waves-light btn redeemBtn disabled" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
+
+                          <%} else { %>
+                            <a class="waves-effect waves-light btn redeemBtn" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
+                            <%}%>
+                      </td>
+                    </tr>
+
+                  <%}%>
+
                   <% } %>
               </tbody>
             </table>

@@ -98,13 +98,32 @@
 
               <tbody>
                 <% for(let i = 0; i < userRewards.length; i++) { %>
-                  <tr>
-                    <td>
-                      <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value='<%=userRewards[i].description%>'>
-                    </td>
-                    <td class='center'>
-                      <input class='browser-default rewardValue' type='number' id='rvalue_<%=userRewards[i].id%>' value='<%=userRewards[i].value%>'>
-                    </td>
+
+
+                  <% if(userRewards[i].redeemed) { %>
+                    <tr class='grey lighten-1'>
+                      <td>
+                        <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value='[REDEEMED] <%=userRewards[i].description%>' disabled>
+                      </td>
+                      <td class='center'>
+                        <input class='browser-default rewardValue' type='number' id='rvalue_<%=userRewards[i].id%>' value='<%=userRewards[i].value%>' disabled>
+                      </td>
+
+                  <%} else { %>
+
+                    <tr>
+                      <td>
+                        <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value='<%=userRewards[i].description%>'>
+                      </td>
+                      <td class='center'>
+                        <input class='browser-default rewardValue' type='number' id='rvalue_<%=userRewards[i].id%>' value='<%=userRewards[i].value%>'>
+                      </td>
+
+                  <% }%>
+
+
+
+
                     <td class='center'>
 
                     <a class="waves-effect waves-light btn red deleteRewardBtn" id="rdel_<%=userRewards[i].id%>"><i class="material-icons">delete</i></a>

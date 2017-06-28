@@ -23,8 +23,20 @@ $(document).ready(() => {
 
   // code for each reward_id btn
   $('.redeemBtn').click((event) => {
-
-
+    const clickedRewardID = $(event.currentTarget).attr('id').match(/\d+/)[0];
+    $.ajax({
+      type: 'PUT',
+      url: `/rewards/redeem/${clickedRewardID}`,
+      data: {
+        redeemed: true,
+      },
+      success: () => {
+        Materialize.toast('Hooray!!', 2000, 'rounded green');
+        setTimeout(location.reload.bind(location), 2000);
+      },
+    }).error(() => {
+      console.error('PUT reward error!');
+    });
   });
 
   $('#showRewards').click(() => {
