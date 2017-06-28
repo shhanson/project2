@@ -25,4 +25,5 @@ blockquote {
   font-style: italic;
   font-size: small;
   text-decoration: underline;
+  display: none;
 }

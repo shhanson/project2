@@ -1,26 +1,34 @@
+function setCookie() {
+  const d = new Date();
+  d.setHours(24);
+  document.cookie = `dismissedQuote=true;expires=${d.toGMTString()}`;
+}
+
 $(document).ready(() => {
   const toastMessages = ['Great job!', 'Keep it up!', 'Wow!!', 'Awesome!'];
 
-
-  $.ajax({
-    type: 'GET',
-    url: 'http://galvanize-cors-proxy.herokuapp.com/http://api.forismatic.com/api/1.0/',
-    data: {
-      method: 'getQuote',
-      lang: 'en',
-      format: 'text',
-    },
-    success: (response) => {
-      $('#quotePlaceholder').text(response);
-    },
-  }).error(() => {
-    console.error('Quote error!');
-  });
-
+  if (!document.cookie) {
+    $.ajax({
+      type: 'GET',
+      url: 'http://galvanize-cors-proxy.herokuapp.com/http://api.forismatic.com/api/1.0/',
+      data: {
+        method: 'getQuote',
+        lang: 'en',
+        format: 'text',
+      },
+      success: (response) => {
+        $('#quotePlaceholder').text(response);
+        $('#dismissQuote').show();
+      },
+    }).error(() => {
+      console.error('Quote error!');
+    });
+  }
 
   $('#dismissQuote').click(() => {
-    $('#quotePlaceholder').toggle();
-    $('#dismissQuote').toggle();
+    setCookie();
+    $('#quotePlaceholder').hide();
+    $('#dismissQuote').hide();
   });
 
   // code for each task_id btn
