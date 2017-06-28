@@ -49,7 +49,6 @@ router.get('/users', (req, res, next) => {
       });
     }).catch((err) => {
       console.error(err);
-      knex.destroy();
       next(err);
     });
   } else {
@@ -78,7 +77,6 @@ router.get('/users/:id', (req, res, next) => {
       });
     }).catch((err) => {
       console.error(err);
-      knex.destroy();
       next(err);
     });
   } else {
@@ -99,7 +97,6 @@ router.post('/users', ev(validations.reg_post), (req, res, next) => {
       res.redirect('/login');
     }).catch((err) => {
       console.error(err);
-      knex.destroy();
       next(err);
     });
   }).catch((err) => {
@@ -153,13 +150,11 @@ router.delete('/users/:id', (req, res, next) => {
         })
         .catch((err) => {
           console.error(err);
-          knex.destroy();
           next(err);
         });
       })
       .catch((err) => {
         console.error(err);
-        knex.destroy();
         next(err);
       });
     }
@@ -184,7 +179,6 @@ router.get('/users/manage/:id', (req, res, next) => {
       });
     }).catch((err) => {
       console.error(err);
-      knex.destroy();
       next(err);
     });
   } else {
