@@ -19,18 +19,15 @@
                   <td>
                     <h5 class="table-title">My Tasks</h5> <a class="btn-floating waves-effect waves-light" id="addTaskBtn" href="/tasks/add"><i class="material-icons">add</i></a></td>
                   <td>Priority</td>
-                  <td>Count </td>
                   <td class="center">Complete</td>
                 </tr>
               </thead>
 
               <tbody>
                 <% let totalTaskCount = 0; %>
+                
                   <% for(let i = 0; i < userTasks.length; i++) { %>
-                    <% console.log("ADDED"); %>
                     <% totalTaskCount += userTasks[i].completed_count %>
-
-
                       <tr>
                         <td>
                           <%=userTasks[i].description %>
@@ -49,14 +46,12 @@
 
                         </td>
 
-                        <td> <%=userTasks[i].completed_count %></td>
 
                         <td class='center'>
                           <a class="waves-effect waves-light btn completeBtn" id="task_<%=userTasks[i].id%>"><i class="material-icons">done</i></a>
                         </td>
                       </tr>
                       <% } %>
-                      <% console.log("TOTAL TASK COUNT: " + totalTaskCount); %>
               </tbody>
             </table>
 
