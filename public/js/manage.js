@@ -28,6 +28,22 @@ $(document).ready(() => {
     });
   });
 
+  $('.deleteTaskBtn').click((event) => {
+    const confirmDelete = confirm('Are you sure you want to delete this task?');
+    if (confirmDelete) {
+      const deleteBtnID = $(event.currentTarget).attr('id').match(/\d+/)[0];
+      $.ajax({
+        type: 'DELETE',
+        url: `/tasks/${deleteBtnID}`,
+        success: () => {
+          location.reload();
+        },
+      }).error(() => {
+        console.error('DELETE task error!');
+      });
+    }
+  });
+
   $('.rewardDescription').on('input', (event) => {
     const clickedDescriptionID = $(event.currentTarget).attr('id').match(/\d+/)[0];
     $(`#rupdate_${clickedDescriptionID}`).attr('disabled', false);
@@ -55,6 +71,22 @@ $(document).ready(() => {
     }).error(() => {
       console.error('PUT reward error!');
     });
+  });
+
+  $('.deleteRewardBtn').click((event) => {
+    const confirmDelete = confirm('Are you sure you want to delete this reward?');
+    if (confirmDelete) {
+      const deleteBtnID = $(event.currentTarget).attr('id').match(/\d+/)[0];
+      $.ajax({
+        type: 'DELETE',
+        url: `/rewards/${deleteBtnID}`,
+        success: () => {
+          location.reload();
+        },
+      }).error(() => {
+        console.error('DELETE reward error!');
+      });
+    }
   });
 
   $('#showRewards').click(() => {
