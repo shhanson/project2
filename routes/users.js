@@ -119,20 +119,7 @@ router.post('/session', ev(validations.login_post), (req, res, next) => {
       if (matched) {
         req.session.id = userID;
         req.session.isAdmin = user.is_admin;
-
-
-        getTasksRewardsForUser(userID).then((result) => {
-          res.render('pages/user', {
-            title: 'Hello, user!',
-            userTasks: result[0],
-            userRewards: result[1],
-            leftNavbar: userID,
-          });
-        }).catch((err) => {
-          console.error(err);
-          knex.destroy();
-          next(err);
-        });
+        res.redirect(`/users/${userID}`);
       } else {
       // wrong password
         console.error('Wrong email or password!');

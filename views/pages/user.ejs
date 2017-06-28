@@ -5,6 +5,8 @@
     <div class="container">
 
       <div class="row">
+
+
         <div class="container">
           <div class="col s12">
 
@@ -12,7 +14,7 @@
 
             </section>
 
-            <table class='highlight bordered'>
+            <table class='highlight bordered' id='tasksTable'>
 
               <thead>
                 <tr>
@@ -25,7 +27,7 @@
 
               <tbody>
                 <% let totalTaskCount = 0; %>
-                
+
                   <% for(let i = 0; i < userTasks.length; i++) { %>
                     <% totalTaskCount += userTasks[i].completed_count %>
                       <tr>
@@ -55,14 +57,7 @@
               </tbody>
             </table>
 
-            <% if(userTasks.length === 0) { %>
-              <p>No tasks yet :( </p>
-              <% } %>
-
-
-
-
-
+            
 
           </div>
         </div>
@@ -74,7 +69,7 @@
         <div class="container">
           <div class="col s12">
 
-            <table class='highlight bordered'>
+            <table class='highlight bordered' id="rewardsTable">
               <thead>
                 <tr>
                   <td>
@@ -108,14 +103,37 @@
               </tbody>
             </table>
 
-            <% if(userRewards.length === 0) { %>
-              <p>No rewards yet :( </p>
-              <% } %>
+
 
           </div>
         </div>
+
+
       </div>
-      <div>
+
+      <div class="row center">
+
+        <div class="container">
+
+        <div class="col s12">
+
+
+
+        <a href="#"><span id="showRewards">View rewards > </span></a>
+        </div>
+
+
+        <div class="col s12">
+
+        <a href="#"><span id="showTasks">< View tasks</span></a>
+        </div>
+
+        </div>
+
+      </div>
+
+
+    <div>
 
 
 <% include ../partials/footer %>
