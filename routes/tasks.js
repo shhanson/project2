@@ -17,8 +17,7 @@ router.use(bodyParser.urlencoded({
 
 router.get('/tasks/:id', (req, res, next) => {
   const taskID = Number.parseInt(req.params.id);
-  console.log(req.session.id);
-  if (!utils.isValidID(taskID) || !req.session.id) {
+  if (!utils.isValidID(taskID) || req.session.id === undefined) {
     next();
   } else {
     knex('users_tasks').first().where('task_id', taskID).then((result) => {
