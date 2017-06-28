@@ -61,19 +61,36 @@ router.post('/rewards', ev(validations.post), (req, res, next) => {
   });
 });
 
-router.put('/rewards/:id', ev(validations.put), (req, res, next) => {
+router.put('/rewards/redeem/:id', (req, res, next) => {
   const rewardID = Number.parseInt(req.params.id);
   if (!utils.isValidID(rewardID)) {
     next();
   } else {
-    knex('rewards').where('id', rewardID).returning('*').update({
+    knex('rewards').where('id', rewardID).update({
+      description: undefined,
+      value: undefined,
+      redeemed: true,
+    }).then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err) => {
+      console.error(err);
+      knex.destroy();
+      next(err);
+    });
+  }
+});
+
+router.put('/rewards/edit/:id', ev(validations.put), (req, res, next) => {
+  const rewardID = Number.parseInt(req.params.id);
+  if (!utils.isValidID(rewardID)) {
+    next();
+  } else {
+    knex('rewards').where('id', rewardID).update({
       description: req.body.description,
       value: req.body.value,
     })
-    .then((updatedReward) => {
-            // Render user page-- how to get user ID???
-      // res.json(updatedReward);
-      // res.json(req.session.id);
+    .then(() => {
       res.sendStatus(200);
     })
     .catch((err) => {
@@ -91,7 +108,6 @@ router.delete('/rewards/:id', (req, res, next) => {
   } else {
     knex('users_rewards').where('reward_id', rewardID).del().then(() => {
       knex('rewards').where('id', rewardID).del().then(() => {
-        // res.redirect(`/users/${req.session.id}`);
         res.sendStatus(200);
       })
       .catch((err) => {

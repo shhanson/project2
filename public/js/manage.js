@@ -28,19 +28,29 @@ $(document).ready(() => {
     });
   });
 
+  $('.rewardDescription').on('input', (event) => {
+    const clickedDescriptionID = $(event.currentTarget).attr('id').match(/\d+/)[0];
+    $(`#rupdate_${clickedDescriptionID}`).attr('disabled', false);
+  });
+
+  $('.rewardValue').on('input', (event) => {
+    const clickedValueID = $(event.currentTarget).attr('id').match(/\d+/)[0];
+    $(`#rupdate_${clickedValueID}`).attr('disabled', false);
+  });
+
+
   $('.updateRewardBtn').click((event) => {
     const clickedRewardID = $(event.currentTarget).attr('id').match(/\d+/)[0];
     const updatedReward = {
-      description: $(`rdescrip_${clickedRewardID}`).val(),
-      value: $(`rvalue_${clickedRewardID}`).val(),
+      description: $(`#rdescrip_${clickedRewardID}`).val(),
+      value: $(`#rvalue_${clickedRewardID}`).val(),
     };
-
     $.ajax({
       type: 'PUT',
       url: `/rewards/edit/${clickedRewardID}`,
       data: updatedReward,
       success: () => {
-
+        Materialize.toast('Saved!', 2000, 'rounded green');
       },
     }).error(() => {
       console.error('PUT reward error!');
