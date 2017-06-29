@@ -8,6 +8,11 @@ input {
   /*margin: 10px;*/
 }
 
+* {
+  font-size: large;
+  font-family: 'Istok Web', sans-serif;
+}
+
 /*#rewardsTable {
   display: none;
 }
