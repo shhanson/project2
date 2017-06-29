@@ -48,7 +48,7 @@ $(document).ready(() => {
           Materialize.toast('CONGRATULATIONS! You formed a habit!!', 6000, 'rounded yellow darken-1');
           $(`#taskRow_${clickedTaskID}`).hide();
         } else {
-          Materialize.toast(toastMessages[Math.floor(Math.random() * toastMessages.length)], 2000, 'rounded green');
+          Materialize.toast(toastMessages[Math.floor(Math.random() * toastMessages.length)], 2000, 'rounded lime accent-1 black-text');
           $('#totalTaskCount').text(totalTaskCount);
           $('.rprogress').text(totalTaskCount);
         }
@@ -63,6 +63,7 @@ $(document).ready(() => {
         });
       },
     }).error(() => {
+      Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
       console.error('PUT task error!');
     });
   });
@@ -77,11 +78,12 @@ $(document).ready(() => {
         redeemed: true,
       },
       success: () => {
-        Materialize.toast('Hooray!!', 2000, 'rounded green');
+        Materialize.toast('Hooray!!', 2000, 'rounded lime accent-1 black-text');
         // setTimeout(location.reload.bind(location), 2000);
         $(`#rewardRow_${clickedRewardID}`).hide();
       },
     }).error(() => {
+      Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
       console.error('PUT reward error!');
     });
   });

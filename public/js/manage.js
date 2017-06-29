@@ -12,15 +12,17 @@ $(document).ready(() => {
   $('.resetTaskBtn').click((event) => {
     const confirmReset = confirm('Are you sure you want to reset this task?');
     if (confirmReset) {
-      console.log('CONFIRMED');
       const clickedTaskID = $(event.currentTarget).attr('id').match(/\d+/)[0];
       $.ajax({
         type: 'PUT',
         url: `/tasks/reset/${clickedTaskID}`,
         success: () => {
-          Materialize.toast('Saved! Refresh to see changes', 4000, 'rounded green');
+          $(`#count_${clickedTaskID}`).text('0');
+          Materialize.toast('Saved!', 2000, 'rounded lime accent-1 black-text');
+          $(`#treset_${clickedTaskID}`).attr('disabled', true);
         },
       }).error(() => {
+        Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
         console.error('PUT task error!');
       });
     }
@@ -38,10 +40,11 @@ $(document).ready(() => {
       url: `/tasks/edit/${clickedTaskID}`,
       data: updatedTask,
       success: () => {
-        Materialize.toast('Saved!', 2000, 'rounded green');
+        Materialize.toast('Saved!', 2000, 'rounded lime accent-1 black-text');
         $(`#tupdate_${clickedTaskID}`).attr('disabled', true);
       },
     }).error(() => {
+      Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
       console.error('PUT task error!');
     });
   });
@@ -54,10 +57,11 @@ $(document).ready(() => {
         type: 'DELETE',
         url: `/tasks/${deleteBtnID}`,
         success: () => {
-          // location.reload();
+          Materialize.toast('Deleted!', 2000, 'lime accent-1 black-text');
           $(`#taskRow_${deleteBtnID}`).hide();
         },
       }).error(() => {
+        Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
         console.error('DELETE task error!');
       });
     }
@@ -85,10 +89,11 @@ $(document).ready(() => {
       url: `/rewards/edit/${clickedRewardID}`,
       data: updatedReward,
       success: () => {
-        Materialize.toast('Saved!', 2000, 'rounded green');
+        Materialize.toast('Saved!', 2000, 'rounded lime accent-1 black-text');
         $(`#rupdate_${clickedRewardID}`).attr('disabled', true);
       },
     }).error(() => {
+      Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
       console.error('PUT reward error!');
     });
   });
@@ -101,9 +106,11 @@ $(document).ready(() => {
         type: 'DELETE',
         url: `/rewards/${deleteBtnID}`,
         success: () => {
+          Materialize.toast('Deleted!', 2000, 'rounded lime accent-1 black-text');
           $(`#rewardRow_${deleteBtnID}`).hide();
         },
       }).error(() => {
+        Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
         console.error('DELETE reward error!');
       });
     }
