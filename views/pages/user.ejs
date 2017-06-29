@@ -55,8 +55,11 @@
                         </td>
                       </tr>
                       <% } %>
-              </tbody>
+
+                    </tbody>
             </table>
+
+            <span id='totalTaskCount' class='hide'><%=totalTaskCount%></span>
 
 
 
@@ -84,12 +87,12 @@
                 <% for(let i = 0; i < userRewards.length; i++) { %>
 
                   <%if(!userRewards[i].redeemed){ %>
-                    <tr>
+                    <tr id="rewardRow_<%=userRewards[i].id%>">
                       <td>
                         <%=userRewards[i].description %>
                       </td>
                       <td class='center'>
-                        <%=totalTaskCount%> /
+                        <span class="rprogress"><%=totalTaskCount%></span> /
                           <%=userRewards[i].value%>
 
                       </td>

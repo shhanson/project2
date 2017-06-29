@@ -42,7 +42,10 @@ $(document).ready(() => {
       },
       success: () => {
         Materialize.toast(toastMessages[Math.floor(Math.random() * toastMessages.length)], 2000, 'rounded green');
-        setTimeout(location.reload.bind(location), 2000);
+
+        const totalTaskCount = Number.parseInt($('#totalTaskCount').text()) + 1;
+        $('#totalTaskCount').text(totalTaskCount);
+        $('.rprogress').text(totalTaskCount);
       },
     }).error(() => {
       console.error('PUT task error!');
@@ -60,24 +63,25 @@ $(document).ready(() => {
       },
       success: () => {
         Materialize.toast('Hooray!!', 2000, 'rounded green');
-        setTimeout(location.reload.bind(location), 2000);
+        // setTimeout(location.reload.bind(location), 2000);
+        $(`#rewardRow_${clickedRewardID}`).hide();
       },
     }).error(() => {
       console.error('PUT reward error!');
     });
   });
 
-  $('#showRewards').click(() => {
-    $('#tasksTable').toggle();
-    $('#rewardsTable').toggle();
-    $('#showRewards').toggle();
-    $('#showTasks').toggle();
-  });
-
-  $('#showTasks').click(() => {
-    $('#rewardsTable').toggle();
-    $('#tasksTable').toggle();
-    $('#showTasks').toggle();
-    $('#showRewards').toggle();
-  });
+  // $('#showRewards').click(() => {
+  //   $('#tasksTable').toggle();
+  //   $('#rewardsTable').toggle();
+  //   $('#showRewards').toggle();
+  //   $('#showTasks').toggle();
+  // });
+  //
+  // $('#showTasks').click(() => {
+  //   $('#rewardsTable').toggle();
+  //   $('#tasksTable').toggle();
+  //   $('#showTasks').toggle();
+  //   $('#showRewards').toggle();
+  // });
 });
