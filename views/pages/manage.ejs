@@ -20,10 +20,10 @@
                   <td>
                     <h5 class="table-title">Edit Tasks</h5></td>
                   <td class="center">Priority</td>
+                  <td class='center'> </td>
                   <td class="center">Count</td>
                   <td class="center">Reset Count</td>
-                  <td class="center">Delete</td>
-                  <td class='center'>Update</td>
+                  <td class="center">Delete Task</td>
                 </tr>
               </thead>
 
@@ -67,6 +67,12 @@
 
                       </td>
 
+                      <td class='center'>
+
+                        <a class="waves-effect waves-light btn updateTaskBtn" id="tupdate_<%=userTasks[i].id%>" disabled>Save</a>
+
+                      </td>
+
                       <td class="center">
 
                         <span id="count_<%=userTasks[i].id%>"><%=userTasks[i].completed_count%></span>
@@ -92,11 +98,7 @@
                         <a class="waves-effect waves-light btn deleteTaskBtn" id="tdel_<%=userTasks[i].id%>"><i class="material-icons">delete</i></a>
                       </td>
 
-                      <td class='center'>
 
-                        <a class="waves-effect waves-light btn updateTaskBtn" id="tupdate_<%=userTasks[i].id%>" disabled>Save</a>
-
-                      </td>
                     </tr>
                     <% } %>
 
@@ -124,8 +126,8 @@
                   <td><h5 class="table-title">Edit Rewards</h5></td>
                   <td class='center'>Value</td>
                   <td class='center'>Redeemed?</td>
-                  <td class='center'>Delete</td>
-                  <td class='center'>Update</td>
+                  <td class='center'></td>
+                  <td class='center'>Delete Reward</td>
                 </tr>
               </thead>
 
@@ -161,15 +163,18 @@
 
 
 
-                    <td class='center'>
 
-                    <a class="waves-effect waves-light btn deleteRewardBtn" id="rdel_<%=userRewards[i].id%>"><i class="material-icons">delete</i></a>
-
-                    </td>
 
                     <td class='center'>
 
                     <a class="waves-effect waves-light btn updateRewardBtn" id="rupdate_<%=userRewards[i].id%>" disabled>Save</a>
+
+                    </td>
+
+
+                    <td class='center'>
+
+                    <a class="waves-effect waves-light btn deleteRewardBtn" id="rdel_<%=userRewards[i].id%>"><i class="material-icons">delete</i></a>
 
                     </td>
                   </tr>
