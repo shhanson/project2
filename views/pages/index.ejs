@@ -23,26 +23,7 @@
         </div>
 
         <div class="col s12 m6 indexDiv"> <h5 class="center">Ready to turn a new leaf?</h5>
-          <form action="/users" method="post">
-
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email">
-
-            <label for="nickname">Choose a nickname:</label>
-            <input type="text" name="nickname" id="nickname">
-
-            <label for="password">Password (8 character minimum):</label>
-            <input type="text" name='password' id='password'>
-
-
-            <label for="vpassword">Retype password:</label>
-            <input type='text' name='vpassword' id='vpassword'>
-            <button class="btn waves-effect waves-light left" type="submit" name="action">Register
-            </button>
-            <a href="/login" class="right">I already have an account!</a>
-
-          </form>
-
+          <% include ../partials/registrationForm %>
 
         </div>
       </div>
