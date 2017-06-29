@@ -5,6 +5,8 @@ const knex = require('../util/knex');
 const bodyParser = require('body-parser');
 const utils = require('../util/utils');
 
+const HABIT_COUNT = 100;
+
 
 // Validation setup
 const ev = require('express-validation');
@@ -92,8 +94,16 @@ router.put('/tasks/increment/:id', (req, res, next) => {
     knex('users_tasks').first().where('task_id', taskID).then((result) => {
       const userID = result.user_id;
       if (userID === req.session.id) {
-        knex('tasks').increment('completed_count', 1).where('id', taskID).then(() => {
-          res.sendStatus(200);
+        knex('tasks').increment('completed_count', 1).where('id', taskID).returning('completed_count')
+        .then((count) => {
+          if (count[0] === HABIT_COUNT) {
+            knex('tasks').where('id', taskID).update('is_habit', true)
+            .catch((err) => {
+              console.error(err);
+              next(err);
+            });
+          }
+          res.json(count[0]);
         })
         .catch((err) => {
           console.error(err);

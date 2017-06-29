@@ -30,29 +30,33 @@
                 <% let totalTaskCount = 0; %>
 
                   <% for(let i = 0; i < userTasks.length; i++) { %>
-                    <% totalTaskCount += userTasks[i].completed_count %>
-                      <tr>
-                        <td>
 
-                        <% if(userTasks[i].priority === 'high') {%>
-                            <span class="new badge red darken-3 left" data-badge-caption='high'></span>
-                        <%} else if(userTasks[i].priority === 'med') { %>
-                              <span class="new badge amber darken-3 left " data-badge-caption='med'></span>
-                        <%} else { %>
-                                <span class="new badge amber accent-3 left" data-badge-caption='low'></span>
-                                <%}%>
+                    <%if(!userTasks[i].is_habit){ %>
+                      <% totalTaskCount += userTasks[i].completed_count %>
+                        <tr id="taskRow_<%=userTasks[i].id%>">
+                          <td>
 
-
-                          <%=userTasks[i].description %>
-                        </td>
+                          <% if(userTasks[i].priority === 'high') {%>
+                              <span class="new badge red darken-3 left" data-badge-caption='high'></span>
+                          <%} else if(userTasks[i].priority === 'med') { %>
+                                <span class="new badge amber darken-3 left " data-badge-caption='med'></span>
+                          <%} else { %>
+                                  <span class="new badge amber accent-3 left" data-badge-caption='low'></span>
+                                  <%}%>
 
 
+                            <%=userTasks[i].description %>
+                          </td>
 
-                        <td class='center'>
-                          <a class="waves-effect waves-light btn completeBtn" id="task_<%=userTasks[i].id%>"><i class="material-icons">done</i></a>
-                        </td>
-                      </tr>
-                      <% } %>
+
+
+                          <td class='center'>
+                            <a class="waves-effect waves-light btn completeBtn" id="task_<%=userTasks[i].id%>"><i class="material-icons">done</i></a>
+                          </td>
+                        </tr>
+                        <% } %>
+                  <%   } %>
+
 
                     </tbody>
             </table>

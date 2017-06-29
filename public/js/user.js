@@ -1,3 +1,5 @@
+const HABIT_COUNT = 100;
+
 function setCookie() {
   const d = new Date();
   d.setHours(24);
@@ -40,12 +42,17 @@ $(document).ready(() => {
       data: {
         completed_count: 1,
       },
-      success: () => {
-        Materialize.toast(toastMessages[Math.floor(Math.random() * toastMessages.length)], 2000, 'rounded green');
-
+      success: (completedCount) => {
         const totalTaskCount = Number.parseInt($('#totalTaskCount').text()) + 1;
-        $('#totalTaskCount').text(totalTaskCount);
-        $('.rprogress').text(totalTaskCount);
+        if (completedCount === HABIT_COUNT) {
+          Materialize.toast('CONGRATULATIONS! You formed a habit!!', 6000, 'rounded yellow darken-1');
+          $(`#taskRow_${clickedTaskID}`).hide();
+          $('#totalTaskCount').text(totalTaskCount - completedCount);
+          $('.rprogress').text(totalTaskCount - completedCount);
+        } else {
+          Materialize.toast(toastMessages[Math.floor(Math.random() * toastMessages.length)], 2000, 'rounded green');
+          $('#totalTaskCount').text(totalTaskCount);
+        }
       },
     }).error(() => {
       console.error('PUT task error!');
