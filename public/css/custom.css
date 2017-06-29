@@ -10,7 +10,13 @@ div {
 .indexDiv {
   /*height: 500px;*/
   margin-bottom: 10px;
+  background-color: #fffde7;
+  /*border: 2px solid #558b2f;*/
 
+}
+
+body {
+  background-color: #558b2f;
 }
 
 .completeBtn, .redeemBtn{
@@ -19,6 +25,7 @@ div {
 
 .indexRow {
   display: flex;
+  background: #fffde7;
 }
 
 .tasksDiv {
