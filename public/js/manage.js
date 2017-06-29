@@ -22,6 +22,7 @@ $(document).ready(() => {
       data: updatedTask,
       success: () => {
         Materialize.toast('Saved!', 2000, 'rounded green');
+        $(`#tupdate_${clickedTaskID}`).attr('disabled', true);
       },
     }).error(() => {
       console.error('PUT task error!');
@@ -36,7 +37,8 @@ $(document).ready(() => {
         type: 'DELETE',
         url: `/tasks/${deleteBtnID}`,
         success: () => {
-          location.reload();
+          // location.reload();
+          $(`#taskRow_${deleteBtnID}`).hide();
         },
       }).error(() => {
         console.error('DELETE task error!');
@@ -67,6 +69,7 @@ $(document).ready(() => {
       data: updatedReward,
       success: () => {
         Materialize.toast('Saved!', 2000, 'rounded green');
+        $(`#rupdate_${clickedRewardID}`).attr('disabled', true);
       },
     }).error(() => {
       console.error('PUT reward error!');
@@ -81,7 +84,7 @@ $(document).ready(() => {
         type: 'DELETE',
         url: `/rewards/${deleteBtnID}`,
         success: () => {
-          location.reload();
+          $(`#rewardRow_${deleteBtnID}`).hide();
         },
       }).error(() => {
         console.error('DELETE reward error!');

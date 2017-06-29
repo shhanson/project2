@@ -27,7 +27,7 @@
 
               <tbody>
                 <% for(let i = 0; i < userTasks.length; i++) { %>
-                  <tr>
+                  <tr id="taskRow_<%=userTasks[i].id%>">
                     <td>
                       <input class='browser-default taskDescription' type='text' id='tdescrip_<%=userTasks[i].id %>' value='<%=userTasks[i].description %>'>
                     </td>
@@ -101,7 +101,7 @@
 
 
                   <% if(userRewards[i].redeemed) { %>
-                    <tr class='grey lighten-1'>
+                    <tr class='grey lighten-1' id="rewardRow_<%=userRewards[i].id%>">
                       <td>
                         <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value='[REDEEMED] <%=userRewards[i].description%>' disabled>
                       </td>
@@ -111,7 +111,7 @@
 
                   <%} else { %>
 
-                    <tr>
+                    <tr id="rewardRow_<%=userRewards[i].id%>">
                       <td>
                         <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value='<%=userRewards[i].description%>'>
                       </td>
