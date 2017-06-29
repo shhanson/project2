@@ -20,6 +20,8 @@
                   <td>
                     <h5 class="table-title">Edit Tasks</h5></td>
                   <td class="center">Priority</td>
+                  <td class="center">Count</td>
+                  <td class="center">Reset Count</td>
                   <td class="center">Delete</td>
                   <td class='center'>Update</td>
                 </tr>
@@ -27,50 +29,82 @@
 
               <tbody>
                 <% for(let i = 0; i < userTasks.length; i++) { %>
-                  <tr id="taskRow_<%=userTasks[i].id%>">
-                    <td>
-                      <input class='browser-default taskDescription' type='text' id='tdescrip_<%=userTasks[i].id %>' value='<%=userTasks[i].description %>'>
-                    </td>
 
-                    <td>
+                  <% if(!userTasks[i].is_habit) { %>
+
+                    <tr id="taskRow_<%=userTasks[i].id%>">
+                          <td>
+                          <input class='browser-default taskDescription' type='text' id='tdescrip_<%=userTasks[i].id %>' value='<%=userTasks[i].description %>'>
 
 
-                    <select class="browser-default taskPriority" id='tpriority_<%=userTasks[i].id%>'>
+                      </td>
 
-                    <%if(userTasks[i].priority === 'high'){ %>
-                      <option value='low'>Low</option>
-                      <option value='med'>Med</option>
-                      <option value='high' selected>High</option>
+                      <td>
 
-                    <%} else if(userTasks[i].priority === 'med') {%>
 
-                      <option value='low'>Low</option>
-                      <option value='med' selected>Med</option>
-                      <option value='high'>High</option>
+                        <select class="browser-default taskPriority" id='tpriority_<%=userTasks[i].id%>'>
 
-                    <%} else { %>
 
-                      <option value='low' selected>Low</option>
-                      <option value='med'>Med</option>
-                      <option value='high'>High</option>
 
-                    <%} %>
+                      <%if(userTasks[i].priority === 'high'){ %>
+                        <option value='low'>Low</option>
+                        <option value='med'>Med</option>
+                        <option value='high' selected>High</option>
 
-                    </select>
+                      <%} else if(userTasks[i].priority === 'med') {%>
 
-                    </td>
+                        <option value='low'>Low</option>
+                        <option value='med' selected>Med</option>
+                        <option value='high'>High</option>
 
-                    <td class='center'>
-                      <a class="waves-effect waves-light btn red deleteTaskBtn" id="tdel_<%=userTasks[i].id%>"><i class="material-icons">delete</i></a>
-                    </td>
+                      <%} else { %>
 
-                    <td class='center'>
+                        <option value='low' selected>Low</option>
+                        <option value='med'>Med</option>
+                        <option value='high'>High</option>
 
-                      <a class="waves-effect waves-light btn updateTaskBtn" id="tupdate_<%=userTasks[i].id%>" disabled>Save</a>
+                      <%} %>
 
-                    </td>
-                  </tr>
-                  <% } %>
+                      </select>
+
+                      </td>
+
+                      <td class="center">
+
+                        <%=userTasks[i].completed_count%>
+
+                      </td>
+
+
+
+                      <td class='center'>
+
+                      <% if (userTasks[i].completed_count === 0){ %>
+                        <a class="waves-effect waves-light btn resetTaskBtn" id="treset_<%=userTasks[i].id%>" disabled>Reset</a>
+                      <%} else { %>
+                        <a class="waves-effect waves-light btn resetTaskBtn" id="treset_<%=userTasks[i].id%>">Reset</a>
+
+                      <%}%>
+                        
+                      </td>
+
+
+
+                      <td class='center'>
+                        <a class="waves-effect waves-light btn deleteTaskBtn" id="tdel_<%=userTasks[i].id%>"><i class="material-icons">delete</i></a>
+                      </td>
+
+                      <td class='center'>
+
+                        <a class="waves-effect waves-light btn updateTaskBtn" id="tupdate_<%=userTasks[i].id%>" disabled>Save</a>
+
+                      </td>
+                    </tr>
+                    <% } %>
+
+                  <%} %>
+
+
               </tbody>
             </table>
 
@@ -91,6 +125,7 @@
                 <tr>
                   <td><h5 class="table-title">Edit Rewards</h5></td>
                   <td class='center'>Value</td>
+                  <td class='center'>Redeemed?</td>
                   <td class='center'>Delete</td>
                   <td class='center'>Update</td>
                 </tr>
@@ -103,7 +138,7 @@
                   <% if(userRewards[i].redeemed) { %>
                     <tr class='grey lighten-1' id="rewardRow_<%=userRewards[i].id%>">
                       <td>
-                        <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value='[REDEEMED] <%=userRewards[i].description%>' disabled>
+                        <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value=' <%=userRewards[i].description%>' disabled>
                       </td>
                       <td class='center'>
                         <input class='browser-default rewardValue' type='number' id='rvalue_<%=userRewards[i].id%>' value='<%=userRewards[i].value%>' disabled>
@@ -121,12 +156,16 @@
 
                   <% }%>
 
+                  <td class='center'>
+                  <%= (userRewards[i].redeemed) ? 'yes' : 'no';%>
+                  </td>
+
 
 
 
                     <td class='center'>
 
-                    <a class="waves-effect waves-light btn red deleteRewardBtn" id="rdel_<%=userRewards[i].id%>"><i class="material-icons">delete</i></a>
+                    <a class="waves-effect waves-light btn deleteRewardBtn" id="rdel_<%=userRewards[i].id%>"><i class="material-icons">delete</i></a>
 
                     </td>
 
@@ -146,6 +185,64 @@
         </div>
 
 
+      </div>
+
+
+      <div class="row">
+
+
+        <div class="container">
+          <div class="col s12 tasksDiv">
+
+
+
+            <table id='habitsTable'>
+
+              <thead>
+                <tr>
+                  <td>
+                    <h5 class="table-title">Edit Habits</h5></td>
+
+                  <td class="center">Delete</td>
+                  <td class='center'>Restore to Tasks</td>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% for(let i = 0; i < userTasks.length; i++) { %>
+
+                  <% if(userTasks[i].is_habit){ %>
+                    <tr id="taskRow_<%=userTasks[i].id%>">
+                        <td>
+                            <%=userTasks[i].description%>
+
+
+                        </td>
+
+
+
+
+                        <td class='center'>
+                          <a class="waves-effect waves-light btn deleteTaskBtn" id="hdel_<%=userTasks[i].id%>"><i class="material-icons">delete</i></a>
+                        </td>
+
+                        <td class='center'>
+
+                          <a class="waves-effect waves-light btn resetTaskBtn" id="treset_<%=userTasks[i].id%>">Restore</a>
+
+                        </td>
+                      </tr>
+                  <%}%>
+
+
+                  <% } %>
+              </tbody>
+            </table>
+
+
+
+          </div>
+        </div>
       </div>
 
       <%# <div class="row center">

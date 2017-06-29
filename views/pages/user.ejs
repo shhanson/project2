@@ -30,9 +30,9 @@
                 <% let totalTaskCount = 0; %>
 
                   <% for(let i = 0; i < userTasks.length; i++) { %>
-
+                    <% totalTaskCount += userTasks[i].completed_count %>
                     <%if(!userTasks[i].is_habit){ %>
-                      <% totalTaskCount += userTasks[i].completed_count %>
+
                         <tr id="taskRow_<%=userTasks[i].id%>">
                           <td>
 

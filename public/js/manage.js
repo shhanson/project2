@@ -9,6 +9,25 @@ $(document).ready(() => {
     $(`#tupdate_${clickedPriorityID}`).attr('disabled', false);
   });
 
+  $('.resetTaskBtn').click((event) => {
+    const confirmReset = confirm('Are you sure you want to reset this task?');
+    if (confirmReset) {
+      console.log('CONFIRMED');
+      const clickedTaskID = $(event.currentTarget).attr('id').match(/\d+/)[0];
+      $.ajax({
+        type: 'PUT',
+        url: `/tasks/reset/${clickedTaskID}`,
+        success: () => {
+          Materialize.toast('Saved! Refresh to see changes', 4000, 'rounded green');
+        },
+      }).error(() => {
+        console.error('PUT task error!');
+      });
+    } else {
+      console.log('NOT CONFIRMED');
+    }
+  });
+
   $('.updateTaskBtn').click((event) => {
     const clickedTaskID = $(event.currentTarget).attr('id').match(/\d+/)[0];
     const updatedTask = {

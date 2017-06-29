@@ -154,6 +154,38 @@ router.put('/tasks/edit/:id', ev(validations.put), (req, res, next) => {
   }
 });
 
+
+router.put('/tasks/reset/:id', (req, res, next) => {
+  const taskID = Number.parseInt(req.params.id);
+  if (!utils.isValidID(taskID) || req.session.id === undefined) {
+    next();
+  } else {
+    knex('users_tasks').where('task_id', taskID).first().then((result) => {
+      const userID = result.user_id;
+      if (userID === req.session.id) {
+        knex('tasks').where('id', taskID).update({
+          completed_count: 0,
+          is_habit: false,
+        }).then(() => {
+          res.sendStatus(200);
+        })
+        .catch((err) => {
+          console.error(err);
+          next(err);
+        });
+      } else {
+        const err = new Error('Not authorized!');
+        err.status = 401;
+        next(err);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+      next();
+    });
+  }
+});
+
 router.delete('/tasks/:id', (req, res, next) => {
   const taskID = Number.parseInt(req.params.id);
   if (!utils.isValidID(taskID) || req.session.id === undefined) {

@@ -1,4 +1,5 @@
 const HABIT_COUNT = 100;
+const CORS_PROXY = 'https://galvanize-cors-proxy.herokuapp.com/';
 
 function setCookie() {
   const d = new Date();
@@ -7,12 +8,12 @@ function setCookie() {
 }
 
 $(document).ready(() => {
-  const toastMessages = ['Great job!', 'Keep it up!', 'Wow!!', 'Awesome!'];
+  const toastMessages = ['Great job!', 'Keep it up!', 'Wow!!', 'Awesome!', 'Way to go!', 'Proud of you!!'];
 
   if (!document.cookie) {
     $.ajax({
       type: 'GET',
-      url: 'https://galvanize-cors-proxy.herokuapp.com/https://api.forismatic.com/api/1.0/',
+      url: `${CORS_PROXY}https://api.forismatic.com/api/1.0/`,
       data: {
         method: 'getQuote',
         lang: 'en',
@@ -47,11 +48,10 @@ $(document).ready(() => {
         if (completedCount === HABIT_COUNT) {
           Materialize.toast('CONGRATULATIONS! You formed a habit!!', 6000, 'rounded yellow darken-1');
           $(`#taskRow_${clickedTaskID}`).hide();
-          $('#totalTaskCount').text(totalTaskCount - completedCount);
-          $('.rprogress').text(totalTaskCount - completedCount);
         } else {
           Materialize.toast(toastMessages[Math.floor(Math.random() * toastMessages.length)], 2000, 'rounded green');
           $('#totalTaskCount').text(totalTaskCount);
+          $('.rprogress').text(totalTaskCount);
         }
       },
     }).error(() => {

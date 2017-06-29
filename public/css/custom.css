@@ -33,12 +33,16 @@ body {
   background-color: #558b2f;
 }
 
-.completeBtn, .redeemBtn{
+.completeBtn, .redeemBtn {
   background-color: #558b2f;
 }
 
-.deleteUserBtn {
-  background-color: red;
+.resetTaskBtn {
+  background-color: #64dd17;
+}
+
+.deleteUserBtn, .deleteTaskBtn, .deleteRewardBtn {
+  background-color: #e91e63;
 }
 
 .indexRow {
