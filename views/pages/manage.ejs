@@ -44,8 +44,6 @@
 
                         <select class="browser-default taskPriority" id='tpriority_<%=userTasks[i].id%>'>
 
-
-
                       <%if(userTasks[i].priority === 'high'){ %>
                         <option value='low'>Low</option>
                         <option value='med'>Med</option>
@@ -85,7 +83,7 @@
                         <a class="waves-effect waves-light btn resetTaskBtn" id="treset_<%=userTasks[i].id%>">Reset</a>
 
                       <%}%>
-                        
+
                       </td>
 
 
@@ -134,9 +132,10 @@
               <tbody>
                 <% for(let i = 0; i < userRewards.length; i++) { %>
 
+                  <tr id="rewardRow_<%=userRewards[i].id%>">
 
                   <% if(userRewards[i].redeemed) { %>
-                    <tr class='grey lighten-1' id="rewardRow_<%=userRewards[i].id%>">
+
                       <td>
                         <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value=' <%=userRewards[i].description%>' disabled>
                       </td>
@@ -146,7 +145,6 @@
 
                   <%} else { %>
 
-                    <tr id="rewardRow_<%=userRewards[i].id%>">
                       <td>
                         <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value='<%=userRewards[i].description%>'>
                       </td>

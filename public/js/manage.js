@@ -23,8 +23,6 @@ $(document).ready(() => {
       }).error(() => {
         console.error('PUT task error!');
       });
-    } else {
-      console.log('NOT CONFIRMED');
     }
   });
 

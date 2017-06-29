@@ -95,16 +95,19 @@
                       </td>
                       <td class='center'>
                         <span class="rprogress"><%=totalTaskCount%></span> /
-                          <%=userRewards[i].value%>
+                          <span class="rvalue" id='<%=userRewards[i].id%>'><%=userRewards[i].value%></span>
 
                       </td>
-                      <td class='center'>
-                        <% if(totalTaskCount < userRewards[i].value) { %>
-                          <a class="waves-effect waves-light btn redeemBtn disabled" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
+                      <td class='center' id="redeemPlaceholder">
 
-                          <%} else { %>
-                            <a class="waves-effect waves-light btn redeemBtn" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
-                            <%}%>
+                      <% if(totalTaskCount < userRewards[i].value) { %>
+                        <a class="waves-effect waves-light btn redeemBtn" id="reward_<%=userRewards[i].id%>" disabled><i class="material-icons">thumb_up</i></a>
+
+                        <%} else { %>
+                          <a class="waves-effect waves-light btn redeemBtn" id="reward_<%=userRewards[i].id%>"><i class="material-icons">thumb_up</i></a>
+                          <%}%>
+
+
                       </td>
                     </tr>
 

@@ -1,5 +1,6 @@
 const HABIT_COUNT = 100;
 const CORS_PROXY = 'https://galvanize-cors-proxy.herokuapp.com/';
+const toastMessages = ['Great job!', 'Keep it up!', 'Wow!!', 'Awesome!', 'Way to go!', 'Proud of you!!'];
 
 function setCookie() {
   const d = new Date();
@@ -8,8 +9,6 @@ function setCookie() {
 }
 
 $(document).ready(() => {
-  const toastMessages = ['Great job!', 'Keep it up!', 'Wow!!', 'Awesome!', 'Way to go!', 'Proud of you!!'];
-
   if (!document.cookie) {
     $.ajax({
       type: 'GET',
@@ -53,6 +52,15 @@ $(document).ready(() => {
           $('#totalTaskCount').text(totalTaskCount);
           $('.rprogress').text(totalTaskCount);
         }
+
+        $('.rvalue').each(function () {
+          const rewardValue = Number.parseInt($(this).text());
+          const rewardID = $(this).attr('id');
+
+          if (rewardValue === totalTaskCount) {
+            $(`#reward_${rewardID}`).attr('disabled', false);
+          }
+        });
       },
     }).error(() => {
       console.error('PUT task error!');

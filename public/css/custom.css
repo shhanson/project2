@@ -1,6 +1,10 @@
-.table-title {
-  display: inline;
-  vertical-align: middle;
+* {
+  font-size: large;
+  font-family: 'Istok Web', sans-serif;
+}
+
+body {
+  background-color: #558b2f;
 }
 
 a {
@@ -14,23 +18,32 @@ div {
   /*background-color: #fffde7*/
 }
 
-.indexDiv {
-  height: 500px;
-  margin-bottom: 10px;
-  background-color: #fffde7;
-
+input {
+  width: 100%;
+  /*margin: 10px;*/
 }
 
-.nav-wrapper {
-  background-color: #64dd17;
+label {
+  font-size: medium;
 }
 
 button[type=submit]{
   background-color: #64dd17;
 }
 
-body {
-  background-color: #558b2f;
+.table-title {
+  display: inline;
+  vertical-align: middle;
+}
+
+.indexDiv {
+  height: 500px;
+  margin-bottom: 10px;
+  background-color: #fffde7;
+}
+
+.nav-wrapper {
+  background-color: #64dd17;
 }
 
 .completeBtn, .redeemBtn {
@@ -65,21 +78,6 @@ body {
 .nav-wrapper {
   margin-top: 0px;
 }
-
-input {
-  width: 100%;
-  /*margin: 10px;*/
-}
-
-label {
-  font-size: medium;
-}
-
-* {
-  font-size: large;
-  font-family: 'Istok Web', sans-serif;
-}
-
 /*#rewardsTable {
   display: none;
 }
