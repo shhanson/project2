@@ -3,16 +3,29 @@
   vertical-align: middle;
 }
 
+a {
+  color: #e91e63;
+}
+
 div {
   margin-top: 10px;
+  margin-bottom: 10px;
+  /*background-color: #fffde7*/
 }
 
 .indexDiv {
-  /*height: 500px;*/
+  height: 500px;
   margin-bottom: 10px;
   background-color: #fffde7;
-  /*border: 2px solid #558b2f;*/
 
+}
+
+.nav-wrapper {
+  background-color: #64dd17;
+}
+
+button[type=submit]{
+  background-color: #64dd17;
 }
 
 body {
@@ -21,6 +34,10 @@ body {
 
 .completeBtn, .redeemBtn{
   background-color: #558b2f;
+}
+
+.deleteUserBtn {
+  background-color: red;
 }
 
 .indexRow {
@@ -66,7 +83,7 @@ label {
   display: none;
 }*/
 .addBtn {
-  background-color: #558b2f;
+  background-color: #e91e63;
 }
 
 #quotePlaceholder {
