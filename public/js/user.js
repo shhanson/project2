@@ -10,7 +10,7 @@ $(document).ready(() => {
   if (!document.cookie) {
     $.ajax({
       type: 'GET',
-      url: 'http://galvanize-cors-proxy.herokuapp.com/http://api.forismatic.com/api/1.0/',
+      url: 'https://galvanize-cors-proxy.herokuapp.com/https://api.forismatic.com/api/1.0/',
       data: {
         method: 'getQuote',
         lang: 'en',

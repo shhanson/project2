@@ -94,7 +94,7 @@ router.post('/users', ev(validations.reg_post), (req, res, next) => {
     knex('users').insert({
       email: req.body.email,
       hashed_password: digest,
-      nickname: req.body.nickname,
+      nickname: req.body.nickname || 'Goal-getter',
     }).then(() => {
       res.redirect('/login');
     }).catch((err) => {

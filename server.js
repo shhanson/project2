@@ -37,14 +37,14 @@ app.use(rewardsRouter);
 app.get('/', (req, res) => {
   const leftNavbar = req.session.id || -1;
   res.render('pages/index', {
-    title: 'Habit tracker tagline',
+    title: 'tinyhabits',
     leftNavbar,
   });
 });
 
 app.get('/login', (req, res) => {
   res.render('pages/login', {
-    title: 'Login to Habit Tracker',
+    title: 'Login to tinyhabits',
   });
 });
 
