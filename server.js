@@ -68,6 +68,7 @@ app.use((err, _req, res, next) => {
     message: err.message,
     error: err,
     title: 'Error!',
+    leftNavbar: _req.session.id || -1,
   });
 });
 

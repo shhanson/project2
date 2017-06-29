@@ -1,7 +1,21 @@
 <% include ../partials/header %>
 
-        <p>Whoops!</p>
-        <p><%=message%></p>
+  <% include ../partials/navbar %>
+
+    <div class="container">
+      <div class="row yellow lighten-5">
+        <div class="container ">
+          <div class="col s12 m6 ">
+
+            <h5>Error!</h5>
+            <p>
+              <%=message%>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
 
 
-<% include ../partials/footer %>
+    <% include ../partials/footer %>
