@@ -3,6 +3,40 @@
   vertical-align: middle;
 }
 
+div {
+  margin-top: 10px;
+}
+
+.indexDiv {
+  /*height: 500px;*/
+  margin-bottom: 10px;
+
+}
+
+.completeBtn, .redeemBtn{
+  background-color: #558b2f;
+}
+
+.indexRow {
+  display: flex;
+}
+
+.tasksDiv {
+  background-color: #fffde7;
+}
+
+.rewardsDiv {
+ background-color: #ccff90;
+}
+
+.updateTaskBtn, .updateRewardBtn {
+  background-color: #558b2f;
+}
+
+.nav-wrapper {
+  margin-top: 0px;
+}
+
 input {
   width: 100%;
   /*margin: 10px;*/
@@ -24,10 +58,12 @@ label {
 #showTasks {
   display: none;
 }*/
+.addBtn {
+  background-color: #558b2f;
+}
 
-blockquote {
+#quotePlaceholder {
   font-style: italic;
-  font-size: large;
 }
 
 #dismissQuote{

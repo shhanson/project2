@@ -8,20 +8,20 @@
 
 
         <div class="container">
-          <div class="col s12">
+          <p id="quotePlaceholder" class='center'>
 
-            <blockquote id="quotePlaceholder" class='center'>
+          </p>
+          <p class="right" id='dismissQuote'>dismiss</p>
+          <div class="col s12 tasksDiv">
 
-            </blockquote>
-            <p class="right" id='dismissQuote'>dismiss</p>
 
-            <table class='highlight bordered' id='tasksTable'>
+
+            <table id='tasksTable'>
 
               <thead>
                 <tr>
                   <td>
-                    <h5 class="table-title">My Tasks</h5> <a class="btn-floating waves-effect waves-light" id="addTaskBtn" href="/tasks/add"><i class="material-icons">add</i></a></td>
-                  <td>Priority</td>
+                    <h5 class="table-title">My Tasks</h5> <a class="btn-floating waves-effect waves-light addBtn" id="addTaskBtn" href="/tasks/add"><i class="material-icons">add</i></a></td>
                   <td class="center">I did it!</td>
                 </tr>
               </thead>
@@ -33,21 +33,19 @@
                     <% totalTaskCount += userTasks[i].completed_count %>
                       <tr>
                         <td>
-                          <%=userTasks[i].description %>
-                        </td>
 
-                        <td class='left'>
-
-                          <% if(userTasks[i].priority === 'high') {%>
-                            <span class="new badge red" data-badge-caption='high'></span>
-                            <%} else if(userTasks[i].priority === 'med') { %>
-                              <span class="new badge orange" data-badge-caption='med'></span>
-                              <%} else { %>
-                                <span class="new badge yellow" data-badge-caption='low'></span>
+                        <% if(userTasks[i].priority === 'high') {%>
+                            <span class="new badge red darken-3 left" data-badge-caption='high'></span>
+                        <%} else if(userTasks[i].priority === 'med') { %>
+                              <span class="new badge amber darken-3 left " data-badge-caption='med'></span>
+                        <%} else { %>
+                                <span class="new badge amber accent-3 left" data-badge-caption='low'></span>
                                 <%}%>
 
 
+                          <%=userTasks[i].description %>
                         </td>
+
 
 
                         <td class='center'>
@@ -71,13 +69,13 @@
 
       <div class="row">
         <div class="container">
-          <div class="col s12">
+          <div class="col s12 rewardsDiv">
 
-            <table class='highlight bordered' id="rewardsTable">
+            <table id="rewardsTable">
               <thead>
                 <tr>
                   <td>
-                    <h5 class="table-title">My Rewards</h5> <a class="btn-floating waves-effect waves-light" id="addRewardBtn" href="/rewards/add"><i class="material-icons">add</i></a></td>
+                    <h5 class="table-title">My Rewards</h5> <a class="btn-floating waves-effect waves-light addBtn" id="addRewardBtn" href="/rewards/add"><i class="material-icons">add</i></a></td>
                   <td class='center'>Progress</td>
                   <td class='center'>Redeem</td>
                 </tr>
