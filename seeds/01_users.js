@@ -12,5 +12,6 @@ exports.seed = knex =>
             knex('users').insert({
               email: testUsers[0].email,
               hashed_password: digest,
+              is_admin: true,
             }).then(() =>
                 knex.raw("SELECT setval('users_id_seq', (SELECT MAX(id) FROM users))"))));
