@@ -12,6 +12,10 @@ a {
   /*text-decoration: underline;*/
 }
 
+.badge {
+  margin-right: 10px;
+}
+
 div {
   margin-top: 10px;
   margin-bottom: 10px;
