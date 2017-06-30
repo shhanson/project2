@@ -96,12 +96,16 @@ router.post('/users', ev(validations.reg_post), (req, res, next) => {
       hashed_password: digest,
       nickname: req.body.nickname || 'Goal-getter',
     }).then(() => {
-      res.redirect('/login');
+      // res.redirect('/login');
+      res.render('pages/login', {
+        title: 'Login to tinyhabits',
+        message: 'You are registered! Login to continue.',
+      });
     }).catch((err) => {
       console.error(err);
       res.render('pages/register', {
         title: 'New User Registration',
-        errMessage: 'That email is already registered!',
+        message: 'That email is already registered!',
       });
       // next(err);
     });
@@ -128,7 +132,7 @@ router.post('/session', ev(validations.login_post), (req, res, next) => {
         console.error('Wrong email or password!');
         res.render('pages/login', {
           title: 'Login to tinyhabits',
-          errMessage: 'Wrong email or password!',
+          message: 'Wrong email or password!',
         });
       }
     }).catch((err) => {
@@ -139,7 +143,7 @@ router.post('/session', ev(validations.login_post), (req, res, next) => {
     console.error('Wrong email or password!');
     res.render('pages/login', {
       title: 'Login to tinyhabits',
-      errMessage: 'Wrong email or password!',
+      message: 'Wrong email or password!',
     });
   });
 });
