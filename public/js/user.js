@@ -53,6 +53,7 @@ $(document).ready(() => {
           $('.rprogress').text(totalTaskCount);
         }
 
+
         $('.rvalue').each(function () {
           const rewardValue = Number.parseInt($(this).text());
           const rewardID = $(this).attr('id').match(/\d+/)[0];

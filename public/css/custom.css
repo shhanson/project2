@@ -33,6 +33,28 @@ label {
 
 button[type=submit]{
   background-color: #64dd17;
+  margin-bottom: 10px;
+}
+
+.blurbDiv{
+
+  width: 90%;
+  margin: 10px;
+  height: 500px;
+  margin-bottom: 10px;
+  background-color: #fffde7;
+  box-sizing: border-box;
+
+}
+
+.regDiv {
+  width: 90%;
+  margin: 10px;
+  height: 500px;
+  margin-bottom: 10px;
+  background-color: #fffde7;
+  box-sizing: border-box;
+
 }
 
 .indexList {
@@ -73,12 +95,13 @@ button[type=submit]{
 
 .indexRow {
   display: flex;
-  background: #fffde7;
+  /*background: #fffde7;*/
   margin-top: 0px;
 }
 
 .logo{
   vertical-align: bottom;
+  width: 500px;
 
 }
 
@@ -92,6 +115,14 @@ button[type=submit]{
 
 .updateTaskBtn, .updateRewardBtn {
   background-color: #558b2f;
+}
+
+.genDiv{
+
+  background-color: #fffde7;
+
+  /*padding: 10px;*/
+
 }
 
 .nav-wrapper {
@@ -123,4 +154,9 @@ button[type=submit]{
   font-size: small;
   text-decoration: underline;
   display: none;
+}
+
+#logoContainer {
+  margin-top: 20px;
+  margin-bottom: 0px;
 }
