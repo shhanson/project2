@@ -55,7 +55,7 @@ $(document).ready(() => {
 
         $('.rvalue').each(function () {
           const rewardValue = Number.parseInt($(this).text());
-          const rewardID = $(this).attr('id');
+          const rewardID = $(this).attr('id').match(/\d+/)[0];
 
           if (rewardValue === totalTaskCount) {
             $(`#reward_${rewardID}`).attr('disabled', false);
@@ -79,7 +79,6 @@ $(document).ready(() => {
       },
       success: () => {
         Materialize.toast('Hooray!!', 2000, 'rounded lime accent-1 black-text');
-        // setTimeout(location.reload.bind(location), 2000);
         $(`#rewardRow_${clickedRewardID}`).hide();
       },
     }).error(() => {

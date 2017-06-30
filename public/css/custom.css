@@ -7,13 +7,13 @@ body {
   background-color: #558b2f;
 }
 
+strong {
+  background-color: yellow;
+}
+
 a {
   color: #64dd17;
   /*text-decoration: underline;*/
-}
-
-.badge {
-  margin-right: 10px;
 }
 
 div {
@@ -55,13 +55,15 @@ button[type=submit]{
   background-color: #64dd17;
 }
 
-
+.badge {
+  margin-right: 10px;
+}
 
 .completeBtn, .redeemBtn {
   background-color: #558b2f;
 }
 
-.resetTaskBtn {
+.resetTaskBtn, .learnBtn {
   background-color: #64dd17;
 }
 
@@ -104,6 +106,10 @@ button[type=submit]{
 }*/
 .addBtn {
   background-color: #e91e63;
+}
+
+.help {
+  text-indent: 50px;
 }
 
 #quotePlaceholder {

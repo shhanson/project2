@@ -54,6 +54,14 @@ app.get('/register', (req, res) => {
   });
 });
 
+app.get('/help', (req, res) => {
+  const leftNavbar = req.session.id || -1;
+  res.render('pages/help', {
+    title: 'How tinyhabits Works',
+    leftNavbar,
+  });
+});
+
 // Error handling for 404
 app.use((_req, res, next) => {
   const err = new Error('Not Found');
