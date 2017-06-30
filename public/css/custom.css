@@ -107,7 +107,9 @@ button[type=submit]{
 }
 
 #quotePlaceholder {
+
   font-style: italic;
+  color: #fff8e1;
 }
 
 #dismissQuote{
