@@ -43,9 +43,13 @@ app.get('/', (req, res) => {
 });
 
 app.get('/login', (req, res) => {
-  res.render('pages/login', {
-    title: 'Login to tinyhabits',
-  });
+  if (req.session.id && req.session.id !== -1) {
+    res.redirect(`/users/${req.session.id}`);
+  } else {
+    res.render('pages/login', {
+      title: 'Login to tinyhabits',
+    });
+  }
 });
 
 app.get('/register', (req, res) => {

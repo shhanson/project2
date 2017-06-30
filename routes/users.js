@@ -122,19 +122,21 @@ router.post('/session', ev(validations.login_post), (req, res, next) => {
       } else {
       // wrong password
         console.error('Wrong email or password!');
-        const err = new Error();
-        err.status = 401;
-        next(err);
+        res.render('pages/login', {
+          title: 'Login to tinyhabits',
+          errMessage: 'Wrong email or password!',
+        });
       }
     }).catch((err) => {
       next(err);
     });
   })
   .catch((err) => {
-    // email not found
-    err.status = 401;
     console.error('Wrong email or password!');
-    next(err);
+    res.render('pages/login', {
+      title: 'Login to tinyhabits',
+      errMessage: 'Wrong email or password!',
+    });
   });
 });
 
