@@ -9,7 +9,12 @@
 
           <% include ../partials/registrationForm %>
 
+
+
         </div>
+        <% if(typeof errMessage !== 'undefined'){ %>
+          <p class="center amber-text"><%=errMessage%></hp>
+        <%} %>
       </div>
     </div>
   </div>

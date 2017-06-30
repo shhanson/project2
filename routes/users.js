@@ -99,7 +99,11 @@ router.post('/users', ev(validations.reg_post), (req, res, next) => {
       res.redirect('/login');
     }).catch((err) => {
       console.error(err);
-      next(err);
+      res.render('pages/register', {
+        title: 'New User Registration',
+        errMessage: 'That email is already registered!',
+      });
+      // next(err);
     });
   }).catch((err) => {
     console.error(err);
