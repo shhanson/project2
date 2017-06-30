@@ -8,7 +8,7 @@ body {
 }
 
 a {
-  color: #e91e63;
+  color: #64dd17;
   /*text-decoration: underline;*/
 }
 
@@ -31,12 +31,17 @@ button[type=submit]{
   background-color: #64dd17;
 }
 
+.indexList {
+  font-size: x-large;
+}
+
 .table-title {
   display: inline;
   vertical-align: middle;
 }
 
 .indexDiv {
+  margin-top: 0px;
   height: 500px;
   margin-bottom: 10px;
   background-color: #fffde7;
@@ -45,6 +50,8 @@ button[type=submit]{
 .nav-wrapper {
   background-color: #64dd17;
 }
+
+
 
 .completeBtn, .redeemBtn {
   background-color: #558b2f;
@@ -61,6 +68,12 @@ button[type=submit]{
 .indexRow {
   display: flex;
   background: #fffde7;
+  margin-top: 0px;
+}
+
+.logo{
+  vertical-align: bottom;
+
 }
 
 .tasksDiv {
