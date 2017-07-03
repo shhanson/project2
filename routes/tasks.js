@@ -62,7 +62,7 @@ router.post('/tasks', ev(validations.post), (req, res, next) => {
   if (req.session.id) {
     knex('tasks').returning('id').insert({
       description: req.body.description,
-      priority: req.body.priority || 1,
+      priority: req.body.priority,
       completed_count: 0,
     }).then((taskID) => {
       knex('users_tasks').insert({

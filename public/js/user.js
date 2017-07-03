@@ -64,7 +64,7 @@ $(document).ready(() => {
         });
       },
     }).error(() => {
-      Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
+      Materialize.toast('Something went wrong! :(', 4000, 'rounded red');
       console.error('PUT task error!');
     });
   });
@@ -83,7 +83,7 @@ $(document).ready(() => {
         $(`#rewardRow_${clickedRewardID}`).hide();
       },
     }).error(() => {
-      Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
+      Materialize.toast('Something went wrong! :(', 4000, 'rounded red');
       console.error('PUT reward error!');
     });
   });

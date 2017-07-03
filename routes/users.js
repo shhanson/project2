@@ -18,7 +18,7 @@ router.use(bodyParser.urlencoded({
 }));
 
 function getTasksForUser(userID) {
-  return knex('users_tasks').join('tasks', 'users_tasks.task_id', 'tasks.id').where('users_tasks.user_id', userID).orderBy('tasks.id');
+  return knex('users_tasks').join('tasks', 'users_tasks.task_id', 'tasks.id').where('users_tasks.user_id', userID).orderBy('tasks.priority', 'desc');
 }
 
 function getRewardsForUser(userID) {

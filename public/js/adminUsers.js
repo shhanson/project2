@@ -10,7 +10,7 @@ $(document).ready(() => {
           location.reload();
         },
       }).error(() => {
-        Materialize.toast('Something went wrong! Try reloading the page:(', 4000, 'rounded red');
+        Materialize.toast('Something went wrong! :(', 4000, 'rounded red');
         console.error('DELETE user error!');
       });
     }

@@ -22,7 +22,7 @@ $(document).ready(() => {
           $(`#treset_${clickedTaskID}`).attr('disabled', true);
         },
       }).error(() => {
-        Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
+        Materialize.toast('Something went wrong! :(', 4000, 'rounded red');
         console.error('PUT task error!');
       });
     }
@@ -45,7 +45,7 @@ $(document).ready(() => {
         $(`#tupdate_${clickedTaskID}`).attr('disabled', true);
       },
     }).error(() => {
-      Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
+      Materialize.toast('Something went wrong! :(', 4000, 'rounded red');
       console.error('PUT task error!');
     });
   });
@@ -62,7 +62,7 @@ $(document).ready(() => {
           $(`#taskRow_${deleteBtnID}`).hide();
         },
       }).error(() => {
-        Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
+        Materialize.toast('Something went wrong! :(', 4000, 'rounded red');
         console.error('DELETE task error!');
       });
     }
@@ -94,7 +94,7 @@ $(document).ready(() => {
         $(`#rupdate_${clickedRewardID}`).attr('disabled', true);
       },
     }).error(() => {
-      Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
+      Materialize.toast('Something went wrong! :(', 4000, 'rounded red');
       console.error('PUT reward error!');
     });
   });
@@ -111,7 +111,7 @@ $(document).ready(() => {
           $(`#rewardRow_${deleteBtnID}`).hide();
         },
       }).error(() => {
-        Materialize.toast('Something went wrong! Try refreshing the page:(', 4000, 'rounded red');
+        Materialize.toast('Something went wrong! :(', 4000, 'rounded red');
         console.error('DELETE reward error!');
       });
     }
