@@ -30,9 +30,10 @@ $(document).ready(() => {
 
   $('.updateTaskBtn').click((event) => {
     const clickedTaskID = $(event.currentTarget).attr('id').match(/\d+/)[0];
+    console.log($(`#tpriority_${clickedTaskID}`).val());
     const updatedTask = {
       description: $(`#tdescrip_${clickedTaskID}`).val(),
-      priority: $(`#tpriority_${clickedTaskID}`).val(),
+      priority: Number.parseInt($(`#tpriority_${clickedTaskID}`).val()),
     };
 
     $.ajax({

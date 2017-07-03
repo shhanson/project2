@@ -36,9 +36,9 @@
                         <tr id="taskRow_<%=userTasks[i].id%>">
                           <td>
 
-                          <% if(userTasks[i].priority === 'high') {%>
+                          <% if(userTasks[i].priority === 2) {%>
                               <span class="new badge red darken-3 left" data-badge-caption='high'></span>
-                          <%} else if(userTasks[i].priority === 'med') { %>
+                          <%} else if(userTasks[i].priority === 1) { %>
                                 <span class="new badge amber darken-3 left " data-badge-caption='med'></span>
                           <%} else { %>
                                   <span class="new badge amber accent-3 left" data-badge-caption='low'></span>

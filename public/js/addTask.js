@@ -3,7 +3,7 @@ $(document).ready(() => {
     event.preventDefault();
     const newTask = {
       description: $('#description').val(),
-      priority: $('input[name=priority]:checked', '#addTaskForm').val(),
+      priority: Number.parseInt($('input[name=priority]:checked', '#addTaskForm').val()),
       completed_count: 0,
     };
 

@@ -45,21 +45,21 @@
                         <select class="browser-default taskPriority" id='tpriority_<%=userTasks[i].id%>'>
 
                       <%if(userTasks[i].priority === 'high'){ %>
-                        <option value='low'>Low</option>
-                        <option value='med'>Med</option>
-                        <option value='high' selected>High</option>
+                        <option value='0'>Low</option>
+                        <option value='1'>Med</option>
+                        <option value='2' selected>High</option>
 
                       <%} else if(userTasks[i].priority === 'med') {%>
 
-                        <option value='low'>Low</option>
-                        <option value='med' selected>Med</option>
-                        <option value='high'>High</option>
+                        <option value='0'>Low</option>
+                        <option value='1' selected>Med</option>
+                        <option value='2'>High</option>
 
                       <%} else { %>
 
-                        <option value='low' selected>Low</option>
-                        <option value='med'>Med</option>
-                        <option value='high'>High</option>
+                        <option value='0' selected>Low</option>
+                        <option value='1'>Med</option>
+                        <option value='2'>High</option>
 
                       <%} %>
 
