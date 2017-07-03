@@ -143,6 +143,10 @@ button[type=submit]{
   text-indent: 50px;
 }
 
+.redeemed {
+  background-color: gainsboro;
+}
+
 #quotePlaceholder {
 
   font-style: italic;

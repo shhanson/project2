@@ -139,10 +139,10 @@
                   <% if(userRewards[i].redeemed) { %>
 
                       <td>
-                        <input class='browser-default rewardDescription' type='text' id='rdescrip_<%=userRewards[i].id%>' value=' <%=userRewards[i].description%>' disabled>
+                        <input class='browser-default rewardDescription redeemed' type='text' id='rdescrip_<%=userRewards[i].id%>' value=' <%=userRewards[i].description%>' disabled>
                       </td>
                       <td class='center'>
-                        <input class='browser-default rewardValue' type='number' id='rvalue_<%=userRewards[i].id%>' value='<%=userRewards[i].value%>' disabled>
+                        <input class='browser-default rewardValue redeemed' type='number' id='rvalue_<%=userRewards[i].id%>' value='<%=userRewards[i].value%>' disabled>
                       </td>
 
                   <%} else { %>
