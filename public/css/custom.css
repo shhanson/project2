@@ -40,7 +40,7 @@ button[type=submit]{
 
   width: 90%;
   margin: 10px;
-  height: 450px;
+  /*height: 450px;*/
   margin-bottom: 10px;
   background-color: #fffde7;
   box-sizing: border-box;
@@ -50,7 +50,7 @@ button[type=submit]{
 .regDiv {
   width: 90%;
   margin: 10px;
-  height: 450px;
+  /*height: 450px;*/
   margin-bottom: 10px;
   background-color: #fffde7;
   box-sizing: border-box;

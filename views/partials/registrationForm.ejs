@@ -1,24 +1,23 @@
 <form action="/users" method="post">
-
   <div class="input-field">
   <label for="email">Email:</label>
-  <input type="email" name="email" id="email">
+  <input type="email" name="email" id="email" required>
 </div>
 
   <div class="input-field">
   <label for="nickname">Choose a nickname:</label>
-  <input type="text" name="nickname" id="nickname">
+  <input type="text" name="nickname" id="nickname" required>
 </div>
 
   <div class="input-field">
   <label for="password">Password (8 character minimum):</label>
-  <input type="password" name='password' id='password'>
+  <input type="password" name='password' id='password' required>
 </div>
 
 
   <div class="input-field">
   <label for="vpassword">Retype password:</label>
-  <input type='password' name='vpassword' id='vpassword'>
+  <input type='password' name='vpassword' id='vpassword' required>
 </div>
   <button class="btn waves-effect waves-light right" type="submit" name="action">Register
   </button>
