@@ -39,6 +39,7 @@ app.get('/', (req, res) => {
   res.render('pages/index', {
     title: 'tinyhabits',
     leftNavbar,
+    script: '/js/register.js',
   });
 });
 
@@ -55,6 +56,7 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
   res.render('pages/register', {
     title: 'New User Registration',
+    script: '/js/register.js',
   });
 });
 
